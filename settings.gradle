@@ -1,0 +1,5 @@
+rootProject.name='iviti'
+
+include 'iviti-rest'
+include 'iviti-domain'
+include 'iviti-ui'
