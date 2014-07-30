@@ -3,11 +3,11 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	version="3.0">
 
-	<display-name>Iviti REST API</display-name>
+	<display-name>Inviti REST API</display-name>
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:com/iviti/rest/spring-all.xml</param-value>
+		<param-value>classpath:com/inviti/rest/spring-all.xml</param-value>
 	</context-param>
 
 	<listener>

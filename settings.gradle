@@ -1,5 +1,5 @@
-rootProject.name='iviti'
+rootProject.name='inviti'
 
-include 'iviti-rest'
-include 'iviti-domain'
-include 'iviti-ui'
+include 'inviti-rest'
+include 'inviti-domain'
+include 'inviti-ui'
