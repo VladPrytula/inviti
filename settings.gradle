@@ -1,5 +1,6 @@
 rootProject.name='inviti'
 
+include 'inviti-model'
 include 'inviti-rest'
-include 'inviti-domain'
+include 'inviti-service'
 include 'inviti-ui'

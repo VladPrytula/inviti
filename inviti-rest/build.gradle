@@ -2,7 +2,7 @@ apply plugin: 'eclipse-wtp'
 apply plugin: 'war'
 
 dependencies {
-    compile project(':inviti-domain')   
+    compile project(':inviti-service')
 
 	compile 'org.springframework:spring-context:' + spring
 	compile 'org.springframework:spring-webmvc:' + spring
