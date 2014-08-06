@@ -5,7 +5,7 @@
 
 	<display-name>Inviti REST API</display-name>
 
-	<context-param>
+<!-- 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:com/inviti/rest/spring-all.xml</param-value>
 	</context-param>
@@ -27,6 +27,6 @@
 	<servlet-mapping>
 		<servlet-name>app</servlet-name>
 		<url-pattern>/</url-pattern>
-	</servlet-mapping>
+	</servlet-mapping> -->
 
 </web-app>
