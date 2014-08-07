@@ -15,12 +15,7 @@ public class RestInitializer implements WebApplicationInitializer {
 	public void onStartup(ServletContext servletContext)
 			throws ServletException {
 		AnnotationConfigWebApplicationContext restContext = new AnnotationConfigWebApplicationContext();
-        restContext.setConfigLocation("com.inviti.rest.config.db");
-        //restContext.register(WebConfig.class);
-
-		//restContext.register(WebConfig.class);
-        //restContext.register(DbConfig.class);
-        //restContext.refresh();
+        restContext.setConfigLocation("com.inviti.service.config");
 
 		servletContext.addListener(new ContextLoaderListener(restContext));
 

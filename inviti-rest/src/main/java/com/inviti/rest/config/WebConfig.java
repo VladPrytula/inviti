@@ -10,8 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @Configuration
 @EnableWebMvc
-//@Import(DbConfig.class)
-@ComponentScan(basePackages = "com.inviti.rest.controller")
+@ComponentScan(basePackages = {"com.inviti.rest.controller","com.inviti.service.repositories"})
 public class WebConfig extends WebMvcConfigurerAdapter {
     //Set default servlet handler, this is the same as <mvc:default-servlet-handler/>
     @Override

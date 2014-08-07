@@ -1,5 +1,6 @@
-package com.inviti.rest.config.db;
+package com.inviti.service.config;
 
+import com.inviti.service.repositories.UserRepository;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.springframework.context.annotation.Bean;
@@ -17,9 +18,8 @@ import java.nio.file.Path;
  */
 @EnableTransactionManagement
 @Configuration
-@EnableNeo4jRepositories(basePackages ="com.invit.rest")
+@EnableNeo4jRepositories("com.inviti.service.repositories")
 public class DbConfig extends Neo4jConfiguration {
-    // private static final String DB_PATH = "target/neo4j";
 
 /*    public DbConfig() throws ClassNotFoundException {
         setBasePackage("com.inviti.model");
@@ -36,6 +36,5 @@ public class DbConfig extends Neo4jConfiguration {
         GraphDatabaseService graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(tempDir.toString());
         return  graphDb;
         //RestGraphDatabase("http://localhost:7474/db/data");
-        //GraphDatabaseFactory().newEmbeddedDatabase(DB_PATH);
     }
 }
