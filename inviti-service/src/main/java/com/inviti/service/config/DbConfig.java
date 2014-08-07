@@ -21,9 +21,9 @@ import java.nio.file.Path;
 @EnableNeo4jRepositories("com.inviti.service.repositories")
 public class DbConfig extends Neo4jConfiguration {
 
-/*    public DbConfig() throws ClassNotFoundException {
+    public DbConfig() throws ClassNotFoundException {
         setBasePackage("com.inviti.model");
-    }*/
+    }
     @Bean
     public GraphDatabaseService graphDatabaseService() {
 

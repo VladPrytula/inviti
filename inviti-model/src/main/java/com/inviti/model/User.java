@@ -3,9 +3,6 @@ package com.inviti.model;
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.NodeEntity;
 
-import javax.management.relation.Role;
-import java.util.Set;
-
 /**
  * Created by vladyslavprytula on 8/7/14.
  */
@@ -13,6 +10,10 @@ import java.util.Set;
 public class User {
     @GraphId
     Long nodeId;
+
+    public String getName() {
+        return name;
+    }
 
     String name;
 
@@ -22,6 +23,4 @@ public class User {
         this.name = "vlad";
         this.id = "id1";
     }
-
-    Set<Role> userRole;
 }
