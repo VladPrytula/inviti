@@ -1,8 +1,7 @@
-package com.inviti.service.repositories;
+package com.inviti.repository.graph;
 
 import com.inviti.model.User;
 import org.springframework.data.neo4j.repository.GraphRepository;
-import org.springframework.data.repository.RepositoryDefinition;
 import org.springframework.stereotype.Repository;
 
 /**

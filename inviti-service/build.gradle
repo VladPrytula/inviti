@@ -1,4 +1,8 @@
+apply plugin: 'eclipse-wtp'
+apply plugin: 'war'
+apply plugin: 'idea'
+
 dependencies {
     compile project(':inviti-model')
-    compile 'org.springframework:spring-tx:4.0.6.RELEASE'
+    compile project(':inviti-repository')
 }
