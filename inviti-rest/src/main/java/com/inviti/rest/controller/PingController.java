@@ -21,6 +21,6 @@ public class PingController {
     public String ping() {
         User user = new User();
         userService.saveUser(user);
-        return userService.findUser().getName()+" "+ "pooong";//
+        return userService.findUser().getName()+" "+ "pong";//
     }
 }
