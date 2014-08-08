@@ -1,6 +1,6 @@
-package com.inviti.service.config;
+package com.inviti.repository.config;
 
-import com.inviti.service.repositories.UserRepository;
+
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +18,7 @@ import java.nio.file.Path;
  */
 @EnableTransactionManagement
 @Configuration
-@EnableNeo4jRepositories("com.inviti.service.repositories")
+@EnableNeo4jRepositories(basePackages = "com.inviti.repository")
 public class DbConfig extends Neo4jConfiguration {
 
     public DbConfig() throws ClassNotFoundException {
