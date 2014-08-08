@@ -11,13 +11,18 @@ public class User {
     @GraphId
     Long nodeId;
 
+    private String name;
+    private String id;
+
     public String getName() {
         return name;
     }
 
-    String name;
 
-    String id;
+    public String getId() {
+        return id;
+    }
+
 
     public User(){
         this.name = "vlad";
