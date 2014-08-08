@@ -131,4 +131,12 @@ body {
 		position: absolute;
 		right: 0;
 	}
+	
 }
+
+.btn-signup {
+		margin-top: 10px;
+	}
+.signin-input {
+	margin-bottom: 25px;
+}	
