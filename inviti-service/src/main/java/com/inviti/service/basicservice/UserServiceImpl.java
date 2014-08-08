@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Override
     @Transactional
@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(readOnly = true)
     public User findUser() {
-        return userRepository.findAll().single();
+        return userRepository.findAll().iterator().next();
     }
 
 }
