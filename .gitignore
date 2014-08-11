@@ -1,5 +1,8 @@
 bin
 build
+gradle/
+gradlew
+gradlew.bat
 .classpath
 .gradle
 .project
