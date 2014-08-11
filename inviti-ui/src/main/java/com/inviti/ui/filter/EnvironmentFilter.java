@@ -35,7 +35,7 @@ public class EnvironmentFilter implements Filter {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream(String.format(ENVIRONMENT_PROPERTIES, env))) {
             properties.load(is);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
