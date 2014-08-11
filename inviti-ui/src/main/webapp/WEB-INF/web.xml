@@ -5,8 +5,18 @@
 
 	<display-name>Inviti</display-name>
 
-	<welcome-file-list>
-		<welcome-file>carousel.html</welcome-file>
+    <filter>
+        <filter-name>EnvironmentFilter</filter-name>
+        <filter-class>com.inviti.ui.filter.EnvironmentFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>EnvironmentFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <welcome-file-list>
+		<welcome-file>carousel.jsp</welcome-file>
 	</welcome-file-list>
 
 </web-app>

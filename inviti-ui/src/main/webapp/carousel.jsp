@@ -34,6 +34,7 @@
 <!-- NAVBAR
 ================================================== -->
 <body>
+    <div id="inviti-rest-url" class="environment">${environment}</div>
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
@@ -97,6 +98,7 @@
 							<li><a href="#">Sign in</a></li>
 							<li><button class="btn btn-primary btn-sm btn-signup"
 									data-toggle="modal" data-target="#myModal">Sign up</button></li>
+                            <li><a id="ping" href="#">Ping</a></li>
 						</ul>
 					</div>
 				</div>
@@ -318,13 +320,14 @@
 	</div>
 	<!-- /.container -->
 
-
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="../../assets/js/docs.min.js"></script>
+
+    <script src="js/main.js"></script>
 
 </body>
 </html>
