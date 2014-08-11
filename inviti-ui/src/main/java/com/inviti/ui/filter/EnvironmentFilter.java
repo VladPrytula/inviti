@@ -1,9 +1,7 @@
 package com.inviti.ui.filter;
 
-import org.springframework.util.Assert;
-
 import javax.servlet.*;
-import java.io.FileInputStream;
+import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -11,6 +9,7 @@ import java.util.Properties;
 /**
  * Created by Sergii_Iakymenko on 11/08/2014.
  */
+@WebFilter(filterName = "EnvironmentFilter", urlPatterns = {"/*"})
 public class EnvironmentFilter implements Filter {
 
     private static final String ENVIRONMENT_PROPERTIES = "com/inviti/ui/inviti-ui-%s.properties";
@@ -33,7 +32,7 @@ public class EnvironmentFilter implements Filter {
         String env = System.getProperty(ENVIRONMENT_NAME, "local").toLowerCase();
         properties = new Properties();
 
-        try (InputStream is = getClass().getClassLoader().getResourceAsStream(String.format(ENVIRONMENT_PROPERTIES, env))){
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream(String.format(ENVIRONMENT_PROPERTIES, env))) {
             properties.load(is);
         } catch (IOException e) {
             e.printStackTrace();
