@@ -19,8 +19,7 @@ public class PingController {
     @RequestMapping(method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public String ping() {
-        User user = new User();
-        userService.saveUser(user);
-        return userService.findUser().getName()+" "+ "pong";//
+        userService.saveUser(new User());
+        return userService.findUser("vlad").getName()+" "+ "pong";
     }
 }

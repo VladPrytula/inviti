@@ -28,5 +28,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll().iterator().next();
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public User findUser(String name) {
+        return userRepository.findByName(name);
+    }
+
 }
 
