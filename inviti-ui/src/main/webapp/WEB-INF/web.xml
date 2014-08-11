@@ -5,8 +5,8 @@
 
 	<display-name>Inviti</display-name>
 
-	<welcome-file-list>
-		<welcome-file>carousel.html</welcome-file>
+    <welcome-file-list>
+		<welcome-file>carousel.jsp</welcome-file>
 	</welcome-file-list>
 
 </web-app>

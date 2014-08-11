@@ -139,4 +139,9 @@ body {
 	}
 .signin-input {
 	margin-bottom: 25px;
-}	
+}
+
+.environment {
+    visibility: hidden;
+    display: none;
+}
