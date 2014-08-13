@@ -16,14 +16,15 @@ import java.util.Set;
 @Repository
 public interface UserRepository extends GraphRepository<User>{
     List<User> findByUserName(String name);
-/*
-    @Query("START user = node:User(userName={userName}) "+
-            "MATCH user-[know:KNOWS]->otherUser "+
-            "RETURN otherUser ")*/
-   @Query("MATCH (u: User {userName:{userName}})-[know:KNOWS]->(otherUser) RETURN otherUser")
+    /*
+        @Query("START user = node:User(userName={userName}) "+
+                "MATCH user-[know:KNOWS]->otherUser "+
+                "RETURN otherUser ")*/
+    @Query("MATCH (u: User {userName:{userName}})-[know:KNOWS]->(otherUser) RETURN otherUser")
     List<User> findFriends(@Param("userName") String userName);
 
- //   Set<User> findByMeeting(Meeting meeting);
+    @Query("MATCH (m:Meeting {meetingName:{meetingName}})<--(users) RETURN users")
+    Set<User> findByMeeting(@Param("meetingName") String meetingName);
 
- //    Set<User> findCollaborators(User user);
+    //    Set<User> findCollaborators(User user);
 }

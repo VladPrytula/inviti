@@ -62,5 +62,4 @@ public class MeetingMembership {
         this.meeting = meeting;
     }
 
-
 }

@@ -1,6 +1,8 @@
 package com.inviti.repository.graph;
 
+import com.inviti.model.Meeting;
 import com.inviti.model.User;
+import com.inviti.repository.config.DbConfig;
 import com.inviti.repository.graph.TestConfig.TestDbConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,13 +21,14 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.isA;
 import static org.hamcrest.Matchers.isIn;
 
 /**
  * Created by vladyslavprytula on 8/12/14.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {TestDbConfig.class})
+@ContextConfiguration(classes = {DbConfig.class})
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
         DirtiesContextTestExecutionListener.class,
         TransactionalTestExecutionListener.class })
@@ -34,9 +37,10 @@ public class UserRepositoryIT {
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    MeetingRepository meetingRepository;
 
     @Test
-    @Transactional
     public void userFriendshipTest(){
         User user1 = new User("user1","1");
         User user2 = new User("user2","2");
@@ -62,4 +66,25 @@ public class UserRepositoryIT {
         assertThat(friendsOfUser1.get(0).getUserName(), isIn(new String[]{"user2", "user3"}));
         userRepository.deleteAll();
     }
+
+    @Test
+    public void userBelongsToMeetingTest(){
+
+        userRepository.deleteAll();
+        meetingRepository.deleteAll();
+
+        User user1 = new User("user1","1");
+        Meeting meeting = new Meeting();
+        user1.belongsTo(meeting,"1stTestUser");
+
+        meetingRepository.save(meeting);
+        userRepository.save(user1);
+
+        user1.getMemberships().iterator().next();
+        meeting.getMeetingName();
+        userRepository.findByMeeting("defaultMeeting");
+        meetingRepository.findByMeetingName("defaultMeeting") ;
+        assertThat(userRepository.findByMeeting("defaultMeeting").iterator().next(), isA(User.class));
+    }
+
 }

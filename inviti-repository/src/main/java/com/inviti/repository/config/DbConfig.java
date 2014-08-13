@@ -22,7 +22,7 @@ import java.nio.file.Path;
 public class DbConfig extends Neo4jConfiguration {
 
     public DbConfig() throws ClassNotFoundException {
-        setBasePackage("com.inviti.model");
+        setBasePackage("com.inviti");
     }
     @Bean
     public GraphDatabaseService graphDatabaseService() {

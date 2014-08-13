@@ -2,6 +2,7 @@ package com.inviti.model;
 
 import com.inviti.relationship.MeetingMembership;
 import com.inviti.relationship.RelationshipTypes;
+import org.neo4j.graphdb.Direction;
 import org.springframework.data.neo4j.annotation.*;
 import org.springframework.data.neo4j.support.index.IndexType;
 
@@ -27,8 +28,8 @@ public class User {
     @RelatedTo(type = RelationshipTypes.KNOWS)
     private Set<User> familiarUsers = new HashSet<>();
 
-    @RelatedToVia(type = RelationshipTypes.BELONGS)
-    private Set<MeetingMembership> memberships;
+    @Fetch @RelatedToVia(elementClass = MeetingMembership.class, type =  RelationshipTypes.BELONGS, direction = Direction.INCOMING)
+    private Set<MeetingMembership> memberships = new HashSet<>();
 
     public User(){
         this("default", "defaultId");

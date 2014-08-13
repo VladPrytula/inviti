@@ -19,6 +19,15 @@ public class Meeting {
     @Indexed(unique = true)
     private String meetingId;
 
+    public Meeting() {
+        this("defaultMeeting", "defaultMeetingId");
+    }
+
+    public Meeting(String meetingName, String meetingId) {
+        this.meetingName = meetingName;
+        this.meetingId = meetingId;
+    }
+
     public Long getNodeId() {
         return nodeId;
     }
@@ -42,7 +51,7 @@ public class Meeting {
     public void setMeetingId(String meetingId) {
         this.meetingId = meetingId;
     }
-    
+
     @Override
     public String toString(){
         return "meeting";
