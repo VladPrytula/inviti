@@ -21,6 +21,6 @@ public class UserController {
     public String ping() {
         User defaultUser = new User();
         userService.saveUser(defaultUser);
-        return userService.findUser("default").getUserName()+" "+ "user pong";
+        return userService.findUser("default").getUserName()+" "+ "user pong- pong";
     }
 }
