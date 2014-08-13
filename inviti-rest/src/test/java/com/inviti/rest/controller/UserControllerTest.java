@@ -2,7 +2,6 @@ package com.inviti.rest.controller;
 
 import com.inviti.model.User;
 import com.inviti.rest.config.TestContext;
-import com.inviti.rest.config.WebConfig;
 import com.inviti.service.basicservice.UserService;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,6 +19,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -31,7 +31,7 @@ import org.springframework.web.context.WebApplicationContext;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {TestContext.class})
 @WebAppConfiguration
-public class PingControllerTest {
+public class UserControllerTest {
 
     @Autowired
     WebApplicationContext wac;
@@ -44,7 +44,7 @@ public class PingControllerTest {
     UserService userServiceMock;
 
     @InjectMocks
-    PingController pingController = new PingController();
+    UserController userController = new UserController();
 
     private MockMvc mockMvc;
     @Before
@@ -54,15 +54,16 @@ public class PingControllerTest {
     }
 
     @Test
-    public void basicPingTest() throws Exception {
+    public void basicUserControllerTest() throws Exception {
         Mockito.doNothing().when(userServiceMock).saveUser(Mockito.any(User.class));
-        Mockito.when(userServiceMock.findUser("vlad")).thenReturn(new User());
+        Mockito.when(userServiceMock.findUser("default")).thenReturn(new User());
 
 
         this.mockMvc.perform(MockMvcRequestBuilders.get("/ping")
                 .accept(MediaType.TEXT_HTML))
+                .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string("vlad pong"));
+                .andExpect(MockMvcResultMatchers.content().string("default pong"));
     }
 
 }

@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(readOnly = true)
     public User findUser(String name) {
-        return userRepository.findByName(name);
+        return userRepository.findByUserName(name).iterator().next();
     }
 
 }

@@ -33,7 +33,8 @@ public class DbConfig extends Neo4jConfiguration {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        GraphDatabaseService graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(tempDir.toString());
+       // GraphDatabaseService remoteGraphDb = new RestGraphDatabase("http://localhost:7474/db/data");
+         GraphDatabaseService graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(tempDir.toString());
         return  graphDb;
         //RestGraphDatabase("http://localhost:7474/db/data");
     }

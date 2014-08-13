@@ -1,8 +1,8 @@
 package com.inviti.rest.config;
 
-
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -12,7 +12,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.inviti.rest.controller","com.inviti.service","com.inviti.repository" })
+/**
+ * we have to exclude repository dbconfig, since it will use inMemoryDB and services would use remote host.could be reconfigured
+ */
+
+@ComponentScan(basePackages = {"com.inviti.rest.controller","com.inviti.service","com.inviti.repository" },
+        excludeFilters = @ComponentScan.Filter(value = com.inviti.repository.annotations.TestContext.class, type = FilterType.ANNOTATION))
 public class TestContext extends WebMvcConfigurerAdapter {
     //Set default servlet handler, this is the same as <mvc:default-servlet-handler/>
     @Override
