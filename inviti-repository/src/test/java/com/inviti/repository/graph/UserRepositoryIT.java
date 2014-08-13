@@ -28,7 +28,7 @@ import static org.hamcrest.Matchers.isIn;
  * Created by vladyslavprytula on 8/12/14.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {DbConfig.class})
+@ContextConfiguration(classes = {TestDbConfig.class})
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
         DirtiesContextTestExecutionListener.class,
         TransactionalTestExecutionListener.class })
@@ -85,6 +85,7 @@ public class UserRepositoryIT {
         userRepository.findByMeeting("defaultMeeting");
         meetingRepository.findByMeetingName("defaultMeeting") ;
         assertThat(userRepository.findByMeeting("defaultMeeting").iterator().next(), isA(User.class));
+        assertThat(userRepository.findByMeeting("defaultMeeting").iterator().next().getUserName(), is("user1"));
     }
 
 }
