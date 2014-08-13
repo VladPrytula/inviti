@@ -9,5 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 public interface UserService {
     void saveUser(User user);
     User findUser();
+    User findUser(String name);
 
 }

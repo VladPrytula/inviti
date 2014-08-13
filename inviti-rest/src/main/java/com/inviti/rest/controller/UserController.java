@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/ping")
-public class PingController {
+public class UserController {
 
     @Autowired
     UserService userService;
@@ -19,8 +19,8 @@ public class PingController {
     @RequestMapping(method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public String ping() {
-        User user = new User();
-        userService.saveUser(user);
-        return userService.findUser().getName()+" "+ "pong";//
+        User defaultUser = new User();
+        userService.saveUser(defaultUser);
+        return userService.findUser("default").getUserName()+" "+ "user pong- pong";
     }
 }

@@ -14,8 +14,10 @@ subprojects {
 
     dependencies {
         compile 'com.google.guava:guava:17.0'
-
         testCompile 'junit:junit:4.11'
-        testCompile 'org.mockito:mockito-all:1.9.5'	
+        testCompile 'org.mockito:mockito-core:1.9.5'
+        testCompile 'org.springframework:spring-test:'+spring
+        testCompile 'org.hamcrest:hamcrest-all:1.3'
+
     }
 }
