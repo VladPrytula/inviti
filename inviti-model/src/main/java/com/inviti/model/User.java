@@ -1,5 +1,6 @@
 package com.inviti.model;
 
+import com.inviti.relationship.MeetingMembership;
 import com.inviti.relationship.RelationshipTypes;
 import org.springframework.data.neo4j.annotation.*;
 import org.springframework.data.neo4j.support.index.IndexType;
@@ -12,8 +13,10 @@ import java.util.Set;
  */
 @NodeEntity
 public class User {
+
+
     @GraphId
-    Long nodeId;
+    private Long nodeId;
 
     @Indexed(indexType = IndexType.FULLTEXT, indexName = "userName")
     private String userName;
@@ -21,35 +24,11 @@ public class User {
     @Indexed(unique = true)
     private String userId;
 
-    public Set<User> getFamiliarUsers() {
-        return familiarUsers;
-    }
-
-    public void setFamiliarUsers(Set<User> familiarUsers) {
-        this.familiarUsers = familiarUsers;
-    }
-
     @RelatedTo(type = RelationshipTypes.KNOWS)
     private Set<User> familiarUsers = new HashSet<>();
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-
-    public String getUserName() {
-        return userName;
-    }
-
-
-    public String getUserId() {
-        return userId;
-    }
-
+    @RelatedToVia(type = RelationshipTypes.BELONGS)
+    private Set<MeetingMembership> memberships;
 
     public User(){
         this("default", "defaultId");
@@ -58,4 +37,34 @@ public class User {
         this.userName = userName;
         this.userId = userId;
     }
+
+    public void setFamiliarUsers(Set<User> familiarUsers) {
+        this.familiarUsers = familiarUsers;
+    }
+
+    public Iterable<MeetingMembership> getMemberships(){
+        return memberships;
+    }
+
+    public MeetingMembership belongsTo(Meeting meeting, String role){
+        MeetingMembership meetingMembership = new MeetingMembership(this,meeting,role);
+        memberships.add(meetingMembership);
+        return meetingMembership;
+    }
+
+
+    public void setNodeId(Long nodeId) {
+        this.nodeId = nodeId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+
+
 }

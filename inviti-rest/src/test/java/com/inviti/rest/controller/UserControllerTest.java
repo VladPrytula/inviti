@@ -63,7 +63,7 @@ public class UserControllerTest {
                 .accept(MediaType.TEXT_HTML))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string("default pong"));
+                .andExpect(MockMvcResultMatchers.content().string("default user pong- pong"));
     }
 
 }
