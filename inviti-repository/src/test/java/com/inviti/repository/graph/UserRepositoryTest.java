@@ -85,7 +85,7 @@ public class UserRepositoryTest {
         user1.getMemberships().iterator().next();
         meeting.getMeetingName();
         userRepository.findByMeeting("defaultMeeting");
-        meetingRepository.findByMeetingName("defaultMeeting") ;
+        assertThat(userRepository.findByMeeting(meeting).iterator().next(), is(user1)) ;
         assertThat(userRepository.findByMeeting("defaultMeeting").iterator().next().getUserName(), is("user1"));
     }
 

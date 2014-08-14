@@ -1,6 +1,5 @@
 package com.inviti.repository.graph.TestConfig;
 
-import com.inviti.repository.annotations.TestContext;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.factory.GraphDatabaseSettings;
 import org.neo4j.test.TestGraphDatabaseFactory;
@@ -15,7 +14,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @EnableTransactionManagement
 @Configuration
-@TestContext
 @EnableNeo4jRepositories(basePackages = "com.inviti.repository")
 public class TestDbConfig  extends Neo4jConfiguration {
 

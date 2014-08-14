@@ -41,12 +41,7 @@ public class MeetingMembership {
 
     @Override
     public boolean equals(Object other) {
-/*        if (this == other) return true;
-        if (other == null || getClass() != other.getClass()) return false;
 
-        User user= (User) other;
-        if (nodeId == null) return super.equals(other);
-        return nodeId.equals(user.nodeId);*/
         if (this == other) return true;
 
         if (nodeId == null) return false;

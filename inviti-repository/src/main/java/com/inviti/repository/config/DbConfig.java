@@ -1,6 +1,7 @@
 package com.inviti.repository.config;
 
 
+import com.inviti.repository.annotations.ProductionConfig;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -22,6 +23,7 @@ import java.nio.file.Path;
  */
 @EnableTransactionManagement
 @Configuration
+@ProductionConfig
 @EnableNeo4jRepositories(basePackages = "com.inviti.repository")
 public class DbConfig extends Neo4jConfiguration {
     @Resource
