@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class TestDbConfig  extends Neo4jConfiguration {
 
     public TestDbConfig() throws ClassNotFoundException {
-        setBasePackage("com.inviti.model");
+        setBasePackage("com.inviti");
     }
     @Bean
     public GraphDatabaseService graphDatabaseService() {
@@ -31,7 +31,6 @@ public class TestDbConfig  extends Neo4jConfiguration {
                 .setConfig( GraphDatabaseSettings.array_block_size, "300" )
                 .newGraphDatabase();
         return  impermanentDb;
-        //RestGraphDatabase("http://localhost:7474/db/data");
     }
 
 }

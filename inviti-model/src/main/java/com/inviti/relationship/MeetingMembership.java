@@ -13,9 +13,10 @@ import org.springframework.data.neo4j.annotation.*;
 @RelationshipEntity(type = RelationshipTypes.BELONGS)
 public class MeetingMembership {
 
-    //TODO: do we have a graphID here?
     @GraphId
-    private Long graphId;
+    private Long nodeId;
+
+    transient private Integer hash;
 
     @StartNode
     @Fetch
@@ -24,7 +25,10 @@ public class MeetingMembership {
     @EndNode
     @Fetch private Meeting meeting;
 
-    private String role; //TODO: to be used later
+    /*
+    *This defines the role the user is assigned in a meeting. Perhaps must be a enum.
+     */
+    private String role;
 
     public MeetingMembership(){};
 
@@ -35,16 +39,33 @@ public class MeetingMembership {
     }
 
 
+    @Override
+    public boolean equals(Object other) {
+/*        if (this == other) return true;
+        if (other == null || getClass() != other.getClass()) return false;
 
-    public int getFriendsCount() {
-        return friendsCount;
+        User user= (User) other;
+        if (nodeId == null) return super.equals(other);
+        return nodeId.equals(user.nodeId);*/
+        if (this == other) return true;
+
+        if (nodeId == null) return false;
+
+        if (! (other instanceof MeetingMembership)) return false;
+
+        return nodeId.equals(((MeetingMembership) other).nodeId);
+
+    }
+    @Override
+    public int hashCode() {
+        if (hash == null) hash = nodeId == null ? System.identityHashCode(this) : nodeId.hashCode();
+        return hash.hashCode();
     }
 
-    public void setFriendsCount(int friendsCount) {
-        this.friendsCount = friendsCount;
+    @Override
+    public String toString() {
+        return String.format("MeetingMembership{ meeting='%s'}", meeting);
     }
-
-    int friendsCount;
 
     public User getUser() {
         return user;
@@ -61,6 +82,5 @@ public class MeetingMembership {
     public void setMeeting(Meeting meeting) {
         this.meeting = meeting;
     }
-
 
 }
