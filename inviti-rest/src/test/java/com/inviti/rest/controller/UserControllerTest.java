@@ -8,21 +8,22 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 
 /**
@@ -34,36 +35,41 @@ import org.springframework.web.context.WebApplicationContext;
 public class UserControllerTest {
 
     @Autowired
-    WebApplicationContext wac;
-    @Autowired
-    MockHttpSession session;
-    @Autowired
-    MockHttpServletRequest request;
+    private WebApplicationContext wac;
 
     @Mock
-    UserService userServiceMock;
-
+    private UserService userService;
     @InjectMocks
-    UserController userController = new UserController();
+    private UserController userController;
 
     private MockMvc mockMvc;
+
     @Before
-    public void setup() {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+        this.mockMvc = webAppContextSetup(this.wac).build();
     }
 
     @Test
-    public void basicUserControllerTest() throws Exception {
-        Mockito.doNothing().when(userServiceMock).saveUser(Mockito.any(User.class));
-        Mockito.when(userServiceMock.findUser("default")).thenReturn(new User());
+    public void testAddUser() throws Exception {
+        doNothing().when(userService).saveUser(any(User.class));
 
+        this.mockMvc.perform(post("/user")
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isCreated());
+    }
 
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/ping")
-                .accept(MediaType.TEXT_HTML))
-                .andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string("default user pong- pong"));
+    @Test
+    public void testGetUser() throws Exception {
+        when(userService.findUser("test")).thenReturn(new User());
+
+        this.mockMvc.perform(get("/user/test")
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                //TODO: model -> JSON -> compare
+                .andExpect(content().string("{\"userName\":\"default\",\"userId\":\"defaultId\",\"memberships\":[]}"));
     }
 
 }

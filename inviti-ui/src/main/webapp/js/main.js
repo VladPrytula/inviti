@@ -5,7 +5,7 @@ function getRestUrl() {
 function ping() {
     $.ajax({
             type: 'GET',
-            url: getRestUrl() + '/ping',
+            url: getRestUrl() + '/user/test',
             success: function (data) {
                 alert(data);
             }
