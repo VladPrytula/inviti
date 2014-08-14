@@ -19,6 +19,8 @@ public class User {
     @GraphId
     private Long nodeId;
 
+    transient private Integer hash;
+
     @Indexed(indexType = IndexType.FULLTEXT, indexName = "userName")
     private String userName;
 
@@ -28,7 +30,7 @@ public class User {
     @RelatedTo(type = RelationshipTypes.KNOWS)
     private Set<User> familiarUsers = new HashSet<>();
 
-    @Fetch @RelatedToVia(elementClass = MeetingMembership.class, type =  RelationshipTypes.BELONGS, direction = Direction.INCOMING)
+    @Fetch @RelatedToVia(type =  RelationshipTypes.BELONGS, direction = Direction.INCOMING)
     private Set<MeetingMembership> memberships = new HashSet<>();
 
     public User(){
@@ -66,6 +68,27 @@ public class User {
         return userId;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) return true;
 
+        if (nodeId == null) return false;
+
+        if (! (other instanceof User)) return false;
+
+        return nodeId.equals(((User) other).nodeId);
+
+    }
+
+    @Override
+    public int hashCode() {
+        if (hash == null) hash = nodeId == null ? System.identityHashCode(this) : nodeId.hashCode();
+        return hash.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return String.format("User{name='%s', id='%s'}", userName, userId);
+    }
 
 }

@@ -31,7 +31,6 @@ public class TestDbConfig  extends Neo4jConfiguration {
                 .setConfig( GraphDatabaseSettings.array_block_size, "300" )
                 .newGraphDatabase();
         return  impermanentDb;
-        //RestGraphDatabase("http://localhost:7474/db/data");
     }
 
 }
