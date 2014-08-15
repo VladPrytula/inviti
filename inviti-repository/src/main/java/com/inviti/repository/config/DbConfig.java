@@ -29,7 +29,7 @@ public class DbConfig extends Neo4jConfiguration {
     }
     @Bean
     public GraphDatabaseService graphDatabaseService() {
-        GraphDatabaseService graphDb= new SpringRestGraphDatabase("http://localhost:7474/db/data");//env.getProperty("inviti.restgraphdb.url"));
+        GraphDatabaseService graphDb= new SpringRestGraphDatabase(env.getProperty("inviti.restgraphdb.url"));
         return  graphDb;
     }
 }
