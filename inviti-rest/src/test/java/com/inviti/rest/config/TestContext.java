@@ -16,9 +16,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 /**
  * we have to exclude repository dbconfig, since it will use inMemoryDB and services would use remote host.could be reconfigured
  */
-
 @ComponentScan(basePackages = {"com.inviti.rest.controller","com.inviti.service","com.inviti.repository" },
-        excludeFilters = @ComponentScan.Filter(value = ProductionConfig.class, type = FilterType.ANNOTATION))
+        excludeFilters = @ComponentScan.Filter(value = ProductionConfig.class,type = FilterType.ANNOTATION))
 public class TestContext extends WebMvcConfigurerAdapter {
     //Set default servlet handler, this is the same as <mvc:default-servlet-handler/>
     @Override

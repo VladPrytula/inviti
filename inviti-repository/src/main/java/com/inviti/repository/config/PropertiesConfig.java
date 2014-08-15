@@ -8,11 +8,11 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 /**
  * Created by vladyslavprytula on 8/14/14.
  */
-@Configuration
-@PropertySource("classpath:com/inviti/repository/inviti-repository-local.properties")
+//@Configuration
+//@PropertySource("/Volumes/HDD/Users/VladyslavPrytula/Documents/Java_Projects/inviti/inviti-repository/src/main/resources/com/inviti/repository/inviti-repository-local.properties")
 public class PropertiesConfig {
-    @Bean
+ /* //  @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();
-    }
+    }*/
 }

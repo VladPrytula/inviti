@@ -1,5 +1,6 @@
-package com.inviti.repository.graph.TestConfig;
+package com.inviti.repository.config;
 
+import com.inviti.repository.annotations.TestConfig;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.factory.GraphDatabaseSettings;
 import org.neo4j.test.TestGraphDatabaseFactory;
@@ -9,11 +10,13 @@ import org.springframework.data.neo4j.config.EnableNeo4jRepositories;
 import org.springframework.data.neo4j.config.Neo4jConfiguration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+
 /**
  * Created by vladyslavprytula on 8/13/14.
  */
 @EnableTransactionManagement
 @Configuration
+@TestConfig
 @EnableNeo4jRepositories(basePackages = "com.inviti.repository")
 public class TestDbConfig  extends Neo4jConfiguration {
 
@@ -22,7 +25,7 @@ public class TestDbConfig  extends Neo4jConfiguration {
     }
     @Bean
     public GraphDatabaseService graphDatabaseService() {
-        GraphDatabaseService impermanentDb = new TestGraphDatabaseFactory()
+        GraphDatabaseService impermanentDb = new  TestGraphDatabaseFactory()
                 .newImpermanentDatabaseBuilder()
                 .setConfig( GraphDatabaseSettings.nodestore_mapped_memory_size, "10M" )
                 .setConfig( GraphDatabaseSettings.string_block_size, "60" )
