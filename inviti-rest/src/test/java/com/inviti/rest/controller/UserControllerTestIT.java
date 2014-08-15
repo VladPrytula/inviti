@@ -15,7 +15,11 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -24,6 +28,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import javax.annotation.Resource;
+
 
 /**
  * Created by vladyslavprytula on 8/8/14.
@@ -31,20 +37,17 @@ import org.springframework.web.context.WebApplicationContext;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {TestContext.class})
 @WebAppConfiguration
-public class UserControllerTest {
+public class UserControllerTestIT {
 
-    @Autowired
+    @Resource
     WebApplicationContext wac;
-    @Autowired
-    MockHttpSession session;
-    @Autowired
-    MockHttpServletRequest request;
+
 
     @Mock
     UserService userServiceMock;
 
     @InjectMocks
-    UserController userController = new UserController();
+    UserController userController ;
 
     private MockMvc mockMvc;
     @Before

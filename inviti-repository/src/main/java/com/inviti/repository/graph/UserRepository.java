@@ -23,6 +23,10 @@ public interface UserRepository extends GraphRepository<User>{
     @Query("MATCH (m:Meeting {meetingName:{meetingName}})<--(users) RETURN users")
     Set<User> findByMeeting(@Param("meetingName") String meetingName);
 
+//    @Query("START m = node({meeting}) MATCH (m)<--(users) RETURN users")
+    @Query("MATCH (m)<--(users) WHERE id(m)={meeting} RETURN users")
+    Set<User> findByMeeting(@Param("meeting") Meeting meeting);
+
     /**
     *Searches independently of meeting, i.e. all collaborators through all the meetings that current user belongs to.
     **/
