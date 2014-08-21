@@ -1,4 +1,4 @@
-package com.inviti.relationship;
+package com.inviti.relationship.types;
 
 
 /**
@@ -7,5 +7,7 @@ package com.inviti.relationship;
 public class RelationshipTypes {
     public static final String KNOWS = "KNOWS";
     public static final String BELONGS = "BELONGS";
+    public static final String STATE = "STATE";
+    public static final String SIMILAR = "SIMILAR";
 }
 

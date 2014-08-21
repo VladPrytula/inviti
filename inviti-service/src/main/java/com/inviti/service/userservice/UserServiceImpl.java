@@ -1,10 +1,13 @@
-package com.inviti.service.basicservice;
+package com.inviti.service.userservice;
 
-import com.inviti.model.User;
+import com.inviti.model.state.Meeting;
+import com.inviti.model.state.User;
 import com.inviti.repository.graph.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Set;
 
 
 /**
@@ -24,14 +27,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public User findUser() {
-        return userRepository.findAll().iterator().next();
+    public User findUser(String name) {
+        return userRepository.findByUserName(name).iterator().next();
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public User findUser(String name) {
-        return userRepository.findByUserName(name).iterator().next();
+    public void addUserToMeeting(User user, Meeting meeting, String role) {
+
+    }
+
+    @Override
+    public Set<User> getFriends(User user) {
+        return null;
+    }
+
+    @Override
+    public Set<Meeting> getFriendsMeetings(User user) {
+        return null;
     }
 
 }

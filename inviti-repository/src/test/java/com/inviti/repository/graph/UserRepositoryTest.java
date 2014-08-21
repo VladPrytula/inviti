@@ -1,7 +1,7 @@
 package com.inviti.repository.graph;
 
-import com.inviti.model.Meeting;
-import com.inviti.model.User;
+import com.inviti.model.state.Meeting;
+import com.inviti.model.state.User;
 import com.inviti.repository.config.TestDbConfig;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,7 +1,7 @@
 package com.inviti.rest.controller;
 
-import com.inviti.model.User;
-import com.inviti.service.basicservice.UserService;
+import com.inviti.model.state.User;
+import com.inviti.service.userservice.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)

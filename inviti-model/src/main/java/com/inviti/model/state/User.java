@@ -1,7 +1,7 @@
-package com.inviti.model;
+package com.inviti.model.state;
 
-import com.inviti.relationship.MeetingMembership;
-import com.inviti.relationship.RelationshipTypes;
+import com.inviti.relationship.structural.MeetingMembership;
+import com.inviti.relationship.types.RelationshipTypes;
 import org.neo4j.graphdb.Direction;
 import org.springframework.data.neo4j.annotation.*;
 import org.springframework.data.neo4j.support.index.IndexType;
@@ -13,7 +13,7 @@ import java.util.Set;
  * Created by vladyslavprytula on 8/7/14.
  */
 @NodeEntity
-public class User {
+public class User{
 
 
     @GraphId
@@ -55,17 +55,8 @@ public class User {
         return meetingMembership;
     }
 
-
-    public void setNodeId(Long nodeId) {
-        this.nodeId = nodeId;
-    }
-
     public String getUserName() {
         return userName;
-    }
-
-    public String getUserId() {
-        return userId;
     }
 
     @Override
@@ -74,7 +65,8 @@ public class User {
 
         if (nodeId == null) return false;
 
-        if (! (other instanceof User)) return false;
+        if (this.getClass()!=other.getClass()) return false;
+        //if (! (other instanceof User)) return false;
 
         return nodeId.equals(((User) other).nodeId);
 

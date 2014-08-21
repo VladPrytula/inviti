@@ -5,7 +5,8 @@ subprojects {
             url "http://m2.neo4j.org/content/repositories/releases/"
         }
         maven {
-            url "http://repo.spring.io/libs-release" }
+            url 'http://repo.spring.io/milestone'
+        }
     }
 
 

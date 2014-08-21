@@ -1,7 +1,8 @@
-package com.inviti.relationship;
+package com.inviti.relationship.structural;
 
-import com.inviti.model.Meeting;
-import com.inviti.model.User;
+import com.inviti.model.state.Meeting;
+import com.inviti.model.state.User;
+import com.inviti.relationship.types.RelationshipTypes;
 import org.springframework.data.neo4j.annotation.*;
 
 /**
