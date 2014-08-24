@@ -4,8 +4,7 @@ import com.inviti.model.identity.MeetingIdentityNode;
 import com.inviti.model.identity.UserIdentityNode;
 import com.inviti.model.state.MeetingStateNode;
 import com.inviti.model.state.UserStateNode;
-import com.inviti.repository.config.DbConfig;
-import com.inviti.repository.config.PropertiesConfig;
+import com.inviti.repository.config.TestDbConfig;
 import com.inviti.repository.graph.State.MeetingStateRepository;
 import com.inviti.repository.graph.State.UserStateRepository;
 import com.inviti.repository.graph.identity.MeetingIdentityRepository;
@@ -31,7 +30,7 @@ import static org.hamcrest.Matchers.*;
  * Created by vladyslavprytula on 8/20/14.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {DbConfig.class, PropertiesConfig.class})//{TestDbConfig.class})
+@ContextConfiguration(classes = {TestDbConfig.class})//{DbConfig.class, PropertiesConfig.class})//
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
         DirtiesContextTestExecutionListener.class,
         TransactionalTestExecutionListener.class })
@@ -93,6 +92,8 @@ public class HistoryGraphIntegrationTest {
         userIdentityRepository.save(userIdentityNode1);
 
         assertThat(meetingStateRepository.findAll().iterator().next(), is(equalTo(meetingStateNode)));
+        userIdentityRepository.findByUserName("userStateNode1");
+        assertThat(userIdentityRepository.findByUserName("userStateNode1").iterator().next(), is(equalTo(userIdentityNode1)));
     }
 
 

@@ -23,6 +23,7 @@ import org.springframework.data.neo4j.support.index.IndexType;
  * Meanwhile we have a work around suggested in the same spring doc
  * @see <a href="http://docs.spring.io/spring-data/data-neo4j/docs/3.0.3.RELEASE/reference/html/programming-model.html">programming model</a>
  */
+@Deprecated
 @NodeEntity
 public class Meeting {
     @GraphId

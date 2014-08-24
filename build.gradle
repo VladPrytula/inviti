@@ -20,5 +20,6 @@ subprojects {
         testCompile 'org.springframework:spring-test:'+spring
         testCompile 'org.hamcrest:hamcrest-all:1.3'
 
+
     }
 }

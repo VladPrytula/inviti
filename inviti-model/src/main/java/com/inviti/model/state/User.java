@@ -12,6 +12,7 @@ import java.util.Set;
 /**
  * Created by vladyslavprytula on 8/7/14.
  */
+@Deprecated
 @NodeEntity
 public class User{
 

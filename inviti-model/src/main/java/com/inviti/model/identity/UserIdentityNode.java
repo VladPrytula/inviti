@@ -18,6 +18,8 @@ public class UserIdentityNode implements Comparable<UserIdentityNode>{
 
     transient private Integer hash;
 
+
+
     @Indexed(unique = true)
     private String userId;
 
@@ -36,6 +38,10 @@ public class UserIdentityNode implements Comparable<UserIdentityNode>{
 
     public UserIdentityNode(String userId) {
         this.userId = userId;
+    }
+
+    public String getUserId() {
+        return userId;
     }
 
     public StateRelationship<UserIdentityNode,UserStateNode> setNewState(UserStateNode userStateNode, long validFrom, long validTo){

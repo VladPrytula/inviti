@@ -12,6 +12,7 @@ import java.util.Set;
 /**
  * Created by vladyslavprytula on 8/13/14.
  */
+@Deprecated
 @Repository
 public interface MeetingRepository extends GraphRepository<Meeting>{
     List<Meeting> findByMeetingName(String meetingName);

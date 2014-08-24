@@ -1,50 +1,39 @@
 package com.inviti.service.userservice;
 
-import com.inviti.model.state.Meeting;
-import com.inviti.model.state.User;
-import com.inviti.repository.graph.UserRepository;
+
+import com.inviti.model.domainmodel.User;
+import com.inviti.repository.graph.State.UserStateRepository;
+import com.inviti.repository.graph.identity.UserIdentityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Set;
 
 
 /**
  * Created by vladyslavprytula on 8/8/14.
  */
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService{
 
     @Autowired
-    private UserRepository userRepository;
+    UserStateRepository userStateRepository;
+    @Autowired
+    UserIdentityRepository userIdentityRepository;
 
     @Override
     @Transactional
-    public void saveUser(User user) {
-        userRepository.save(user);
+    public void save(User user) {
+        //first relationship between state and id was created in constructor. save the initial state
+        //omit verification for now
+        userStateRepository.save(user.getCurrentUserStateNode());
+        userIdentityRepository.save(user.getUserIdentityNode());
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public User findUser(String name) {
-        return userRepository.findByUserName(name).iterator().next();
+    public User find(String userName) {
+        //TODO: incorrect in general since I pass the firs element in set to consturctor
+        return new User(userIdentityRepository.findByUserName(userName).iterator().next().getUserId(),
+                userStateRepository.findByUserName(userName).iterator().next().getUserName());
     }
-
-    @Override
-    public void addUserToMeeting(User user, Meeting meeting, String role) {
-
-    }
-
-    @Override
-    public Set<User> getFriends(User user) {
-        return null;
-    }
-
-    @Override
-    public Set<Meeting> getFriendsMeetings(User user) {
-        return null;
-    }
-
 }
 

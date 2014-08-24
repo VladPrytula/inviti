@@ -1,6 +1,6 @@
 package com.inviti.rest.controller;
 
-import com.inviti.model.state.User;
+import com.inviti.model.domainmodel.User;
 import com.inviti.rest.config.TestContext;
 import com.inviti.service.userservice.UserService;
 import org.junit.Before;
@@ -39,6 +39,9 @@ public class UserControllerTestIT {
     @Mock
     UserService userServiceMock;
 
+    @Mock
+    User userMock;
+
     @InjectMocks
     UserController userController ;
 
@@ -51,15 +54,16 @@ public class UserControllerTestIT {
 
     @Test
     public void basicUserControllerTest() throws Exception {
-        Mockito.doNothing().when(userServiceMock).saveUser(Mockito.any(User.class));
-        Mockito.when(userServiceMock.findUser("default")).thenReturn(new User());
+        Mockito.doNothing().when(userServiceMock).save(Mockito.any(User.class));
+        Mockito.when(userMock.getName()).thenReturn("defaultName");
+        Mockito.when(userServiceMock.find("defaultName")).thenReturn(userMock);
 
 
         this.mockMvc.perform(MockMvcRequestBuilders.get("/ping")
                 .accept(MediaType.TEXT_HTML))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string("default user pong- pong"));
+                .andExpect(MockMvcResultMatchers.content().string("defaultName"));
     }
 
 }
