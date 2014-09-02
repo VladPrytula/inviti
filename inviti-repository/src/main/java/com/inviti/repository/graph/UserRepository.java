@@ -1,7 +1,7 @@
 package com.inviti.repository.graph;
 
-import com.inviti.model.Meeting;
-import com.inviti.model.User;
+import com.inviti.model.state.Meeting;
+import com.inviti.model.state.User;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.GraphRepository;
 import org.springframework.data.repository.query.Param;
@@ -13,6 +13,7 @@ import java.util.Set;
 /**
  * Created by vladyslavprytula on 8/7/14.
  */
+@Deprecated
 @Repository
 public interface UserRepository extends GraphRepository<User>{
     List<User> findByUserName(String name);
@@ -33,4 +34,9 @@ public interface UserRepository extends GraphRepository<User>{
     @Query("MATCH (u:User {userName:{userName}})-[:BELONGS]->meeting<-[:BELONGS]-collaborator "+
             "RETURN collaborator")
     Set<User> findCollaborators(@Param("userName") String userName);
+
+
+    @Query("MATCH (u:User {userName:{userName}})-[:BELONGS]->meeting<-[:BELONGS]-collaborator "+
+            "RETURN collaborator")
+    Set<User> getNearby(@Param("user") User user);//TODO: not covered by test
 }

@@ -1,7 +1,8 @@
-package com.inviti.relationship;
+package com.inviti.relationship.structural;
 
-import com.inviti.model.Meeting;
-import com.inviti.model.User;
+import com.inviti.model.state.Meeting;
+import com.inviti.model.state.User;
+import com.inviti.relationship.types.RelationshipTypes;
 import org.springframework.data.neo4j.annotation.*;
 
 /**
@@ -10,6 +11,7 @@ import org.springframework.data.neo4j.annotation.*;
  * MEMBER_OF has an associated property–role–that’s analogous to adding a column to a link table in a RDBMS,
  * The User.belongsTo () method provides a way to assign a user to a meeting using a special MeetingMembership “relationship entity”
  */
+@Deprecated
 @RelationshipEntity(type = RelationshipTypes.BELONGS)
 public class MeetingMembership {
 
