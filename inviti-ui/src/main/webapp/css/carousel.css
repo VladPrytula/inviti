@@ -145,3 +145,7 @@ body {
     visibility: hidden;
     display: none;
 }
+
+.add-user-server-error{
+    margin-left: 20px;
+}
