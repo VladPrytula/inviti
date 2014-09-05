@@ -29,7 +29,6 @@
 
 <!-- Custom styles for this template -->
 <link href="css/carousel.css" rel="stylesheet">
-<link href="css/ekko-lightbox.min.css" rel="stylesheet">
 </head>
 <!-- NAVBAR
 ================================================== -->
@@ -47,19 +46,25 @@
 					<h4 class="modal-title" id="myModalLabel">Sign up a new user</h4>
 				</div>
 				<div class="modal-body">
-					<div class="input-group signin-input">
-						<input type="text" class="form-control" placeholder="Username">
+					<div class="input-group signin-input has-error">
+                        <label class="control-label">&nbsp;</label>
+						<input type="text" class="form-control" placeholder="Username" id="name">
 					</div>
-					<div class="input-group signin-input">
-						<input type="text" class="form-control" placeholder="Email">
+					<div class="input-group signin-input has-error">
+                        <label class="control-label">&nbsp;</label>
+						<input type="text" class="form-control" placeholder="Email" id="email">
 					</div>
-					<div class="input-group signin-input">
-						<input class="form-control" type="password" placeholder="Password">
+					<div class="input-group signin-input has-error">
+                        <label class="control-label">&nbsp;</label>
+						<input class="form-control" type="password" placeholder="Password" id="password">
 					</div>
 				</div>
+                <div class="form-group has-error has-feedback add-user-server-error" id="server-error">
+                    <label class="control-label">Input with error</label>
+                </div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary" data-loading-text="Submiting..." id="add-user-button">Submit</button>
 				</div>
 			</div>
 		</div>
@@ -325,8 +330,8 @@
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script src="../../assets/js/docs.min.js"></script>
-
+    <script src="js/underscore-min.js"></script>
+    <script src="js/backbone-min.js"></script>
     <script src="js/main.js"></script>
 
 </body>
