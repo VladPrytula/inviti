@@ -7,9 +7,9 @@ import org.springframework.data.neo4j.annotation.*;
 
 /**
  * Created by vladyslavprytula on 8/12/14.
- * This one’s more interesting than the KNOWS relationship because
- * MEMBER_OF has an associated property–role–that’s analogous to adding a column to a link table in a RDBMS,
- * The User.belongsTo () method provides a way to assign a user to a meeting using a special MeetingMembership “relationship entity”
+ * This one's more interesting than the KNOWS relationship because
+ * MEMBER_OF has an associated property-role-that's analogous to adding a column to a link table in a RDBMS,
+ * The User.belongsTo () method provides a way to assign a user to a meeting using a special MeetingMembership 'relationship entity'
  */
 @Deprecated
 @RelationshipEntity(type = RelationshipTypes.BELONGS)
