@@ -11,7 +11,7 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
  */
 @Configuration
 @ProductionConfig
-@PropertySource("classpath:com/inviti/repository/inviti-repository-local.properties")
+@PropertySource("classpath:inviti-repository-local.properties")
 public class PropertiesConfig {
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {

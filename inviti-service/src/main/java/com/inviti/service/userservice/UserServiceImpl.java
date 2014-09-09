@@ -1,6 +1,7 @@
 package com.inviti.service.userservice;
 
 
+import com.inviti.model.domainmodel.Meeting;
 import com.inviti.model.domainmodel.User;
 import com.inviti.repository.graph.State.UserStateRepository;
 import com.inviti.repository.graph.identity.UserIdentityRepository;
@@ -34,6 +35,11 @@ public class UserServiceImpl implements UserService{
         //TODO: incorrect in general since I pass the firs element in set to consturctor
         return new User(userIdentityRepository.findByUserName(userName).iterator().next().getUserId(),
                 userStateRepository.findByUserName(userName).iterator().next().getUserName());
+    }
+
+    @Override
+    public void assignToMeeting(User user, Meeting meeting, String role) {
+
     }
 }
 
