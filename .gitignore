@@ -15,5 +15,6 @@ gradlew.bat
 *.ipr
 *.iws
 /out/
+target
 
 *.war

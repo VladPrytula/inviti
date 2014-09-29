@@ -5,9 +5,18 @@ apply plugin: 'idea'
 dependencies {
     compile project(':inviti-service')
 
+
 	compile 'org.springframework:spring-context:' + spring
 	compile 'org.springframework:spring-webmvc:'+spring
     compile 'com.fasterxml.jackson.core:jackson-databind:2.4.1.3'
     compile 'javax.servlet:javax.servlet-api:3.1.0'
+    compile "com.mangofactory:swagger-springmvc:0.8.8"
+
+    /**
+     * this is here since UserControllerIt is depnedent on TestDbConfig to Run
+     * TODO: should not be forgotten when we will split integration test
+     */
+    testCompile project(':inviti-repository').sourceSets.test.output
+    testCompile project(':inviti-repository').sourceSets.test.runtimeClasspath
 
 }

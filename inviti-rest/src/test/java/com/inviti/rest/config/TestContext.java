@@ -1,8 +1,6 @@
 package com.inviti.rest.config;
 
-import com.inviti.model.User;
-import com.inviti.service.basicservice.UserService;
-import org.springframework.context.annotation.Bean;
+import com.inviti.repository.annotations.ProductionConfig;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
@@ -15,30 +13,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.inviti.rest.controller"})
+/**
+ * we have to exclude repository dbconfig, since it will use inMemoryDB and services would use remote host.could be reconfigured
+ */
+@ComponentScan(basePackages = {"com.inviti.rest.controller","com.inviti.service","com.inviti.repository" },
+        excludeFilters = @ComponentScan.Filter(value = ProductionConfig.class,type = FilterType.ANNOTATION))
 public class TestContext extends WebMvcConfigurerAdapter {
+    //Set default servlet handler, this is the same as <mvc:default-servlet-handler/>
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
-
-    //TODO: this should be injected via mockito
-    @Bean
-    public UserService userService() {
-        return new UserService() {
-            @Override
-            public void saveUser(User user) {
-            }
-
-            @Override
-            public User findUser() {
-                return new User();
-            }
-
-            @Override
-            public User findUser(String name) {
-                return new User();
-            }
-        };
-    }
+    //to load static resource
 }
