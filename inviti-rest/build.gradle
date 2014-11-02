@@ -15,7 +15,7 @@ dependencies {
     compile 'org.springframework.security:spring-security-config:3.2.5.RELEASE'
     compile 'joda-time:joda-time:2.4'
     compile 'org.apache.commons:commons-lang3:3.3.2'
-
+    compile "com.mangofactory:swagger-springmvc:0.8.8"
 
     /**
      * this is here since UserControllerIt is depnedent on TestDbConfig to Run
