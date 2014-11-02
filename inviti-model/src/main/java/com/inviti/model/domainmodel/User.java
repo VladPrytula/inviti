@@ -1,58 +1,110 @@
 package com.inviti.model.domainmodel;
 
-import com.inviti.model.identity.UserIdentityNode;
-import com.inviti.model.state.UserStateNode;
+import com.inviti.relationship.StructuralRelationship;
+import com.inviti.relationship.types.RelationshipTypes;
+import org.springframework.data.neo4j.annotation.*;
+import org.springframework.data.neo4j.support.index.IndexType;
 
-import java.util.Date;
+import java.util.*;
 
 /**
  * Created by vladyslavprytula on 8/22/14.
- * Due to the fact that I have separated entities into their ID and State it looks like we are facing some kind of O-R impedance mismatch
- * This leads DM classes that aggregates Id and State.
- * It is supposed that REST layer will operate in terms of DM classes, while services and repositories will operate on IDs and States
- * Additionally we are "separating" "behaviour" from "state"
+ * Entity Equality
+ *
+ * Entity equality can be a grey area, and it is debatable whether natural keys or database ids best describe equality,
+ * there is the issue of versioning over time, etc. For Spring Data Neo4j we have adopted the convention that database-issued ids
+ * are the basis for equality, and that has some consequences:
+ *
+ * 1. Before you attach an entity to the database, i.e. before the entity has had its id-field populated, we suggest you rely on object identity
+ *    for comparisons
+ * 2. Once an entity is attached, we suggest you rely solely on the id-field for equality
+ * 3. When you attach an entity, its hashcode changes - because you keep equals and hashcode consistent and rely on the database ID,
+ *    and because Spring Data Neo4j populates the database ID on save
+ * That causes problems if you had inserted the newly created entity into a hash-based collection before saving.
+ * That can be worked around, though SPRING DOC strongly advises to adopt a convention of not working with un-attached entities, to keep  code simple.
+ * Meanwhile we have a work around suggested in the same spring doc
+ * @see <a href="http://docs.spring.io/spring-data/data-neo4j/docs/3.0.3.RELEASE/reference/html/programming-model.html">programming model</a>
+
  */
-public class User {
-    private UserIdentityNode userIdentityNode;
-    private UserStateNode currentUserStateNode;
+@NodeEntity
+public class User implements Comparable<User>{
+    @GraphId
+    private Long nodeId;
 
-    public User(){
-        this("defaultId", "defaultName");
-    };
+    transient private Integer hash;
 
-    public User(UserIdentityNode userIdentityNode, UserStateNode userStateNode){
-        this.userIdentityNode = userIdentityNode;
-        this.currentUserStateNode = userStateNode;
-        /**
-         * set state relationship TODO: this should not be here
-         * this is related to repository, orm, persistence layers. not to the Domain.
-         * getHisotyr method would also belong to service, repository layer.
-         */
-        userIdentityNode.setNewState(currentUserStateNode, new Date().getTime(), Long.MAX_VALUE);
+    @Indexed(unique = true)
+    private String userId;
+
+    @Indexed(indexType = IndexType.FULLTEXT, indexName = "userName")
+    private String userName;
+
+    @Fetch
+    @RelatedToVia(type = RelationshipTypes.BELONGS)
+    private Set<StructuralRelationship<User,Meeting>> userMeetingStructuralRelationships = new HashSet<>();
+
+    @Fetch
+    @RelatedToVia(type = RelationshipTypes.KNOWS)
+    private Set<StructuralRelationship<User,User>> userUserStructuralRelationships = new HashSet<>();
+
+
+    public User() {
+        this("defaultUserId", "defaultUserName");
     }
 
-    public User(String userId, String userName){
-        this.userIdentityNode = new UserIdentityNode(userId);
-        this.currentUserStateNode = new UserStateNode(userName);
-        /**
-         * set state relationship
-         */
-        userIdentityNode.setNewState(currentUserStateNode, new Date().getTime(), Long.MAX_VALUE);
+    public User(String userId) {
+        this.userId = userId;
+        this.userId = "defaultUserName";
+    }
+    public User(String userId, String userName) {
+        this.userId = userId;
+        this.userName = userName;
     }
 
-    public String getName() {
-        return currentUserStateNode.getUserName();
+    public String getUserId() {
+        return userId;
     }
 
-    public String getId() {
-        return userIdentityNode.getUserId();
+    public String getUserName(){
+        return userName;
     }
 
-    public UserIdentityNode getUserIdentityNode() {
-        return userIdentityNode;
+
+    public StructuralRelationship<User,Meeting> belongsTo(Meeting meeting, String role, long validFrom, long validTo){
+        StructuralRelationship<User,Meeting> structuralRelationship =
+                new StructuralRelationship<User,Meeting>(this, meeting, role, validFrom, validTo);
+        userMeetingStructuralRelationships.add(structuralRelationship);
+        return structuralRelationship;
     }
 
-    public UserStateNode getCurrentUserStateNode() {
-        return currentUserStateNode;
+    public StructuralRelationship<User,User> knowsOf(User user, long validFrom, long validTo){
+        StructuralRelationship<User,User> structuralRelationship =
+                new StructuralRelationship<User,User>(this, user, validFrom, validTo);
+        userUserStructuralRelationships.add(structuralRelationship);
+        return structuralRelationship;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) return true;
+
+        if (nodeId == null) return false;
+
+        if (this.getClass()!=other.getClass()) return false;
+        //if (! (other instanceof User)) return false;
+
+        return nodeId.equals(((User) other).nodeId);
+
+    }
+
+    @Override
+    public int hashCode() {
+        if (hash == null) hash = nodeId == null ? System.identityHashCode(this) : nodeId.hashCode();
+        return hash.hashCode();
+    }
+
+    @Override
+    public int compareTo(User o) {
+        return this.userId.compareTo(o.userId);
     }
 }
