@@ -1,7 +1,10 @@
 package com.inviti.repository.graph;
 
-import com.inviti.model.state.Meeting;
-import com.inviti.model.state.User;
+import com.inviti.model.domainmodel.Meeting;
+import com.inviti.model.domainmodel.User;
+import com.inviti.repository.annotations.ProductionConfig;
+import com.inviti.repository.config.DbConfig;
+import com.inviti.repository.config.PropertiesConfig;
 import com.inviti.repository.config.TestDbConfig;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,9 +18,9 @@ import org.springframework.test.context.support.DirtiesContextTestExecutionListe
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -46,76 +49,55 @@ public class UserRepositoryTest {
 
     @Test
     @Transactional
-    public void userFriendshipTest(){
-        User user1 = new User("user1","1");
-        User user2 = new User("user2","2");
-        User user3 = new User("user3","3");
-
+    public void basicUserSearchTest(){
+        //perform basic search test
         User defaultUser = new User();
         userRepository.save(defaultUser);
-        userRepository.findByUserName("default");
-        assertThat( userRepository.findByUserName("default").iterator().next().getUserName(), is( "default" ) );
+        userRepository.findByUserName("defaultUserName");
+        assertThat( userRepository.findByUserName("defaultUserName").iterator().next().getUserName(), is( "defaultUserName" ) );
         userRepository.deleteAll();
+    }
 
+    @Test
+    @Transactional
+    public void userFriendshipTest(){
 
-        user1.setFamiliarUsers(new HashSet<>(Arrays.asList(user2, user3)));
-        user2.setFamiliarUsers(new HashSet<>(Arrays.asList(user1,user3)));
-        user3.setFamiliarUsers(new HashSet<>(Arrays.asList(user2,user1)));
+        //Define several users
+        User user1 = new User("1","user1");
+        User user2 = new User("2","user2");
+        User user3 = new User("3","user3");
+
+        // persistence order is important for neo
+        userRepository.save(user2);
+
+        //check knowsOf relationship
+        user1.knowsOf(user2,new Date().getTime(), new Date().getTime() + 1000000000l);
+
+        userRepository.save(user3);
+        user1.knowsOf(user3,new Date().getTime(), new Date().getTime() + 1000000000l);
 
         userRepository.save(user1);
-        userRepository.save(user2);
-        userRepository.save(user3);
+        user3.knowsOf(user1,new Date().getTime(), new Date().getTime() + 1000000000l);
+
+
 
         List<User> friendsOfUser1 = userRepository.findFriends("user1");
         assertThat(friendsOfUser1.get(0).getUserName(), isIn(new String[]{"user2", "user3"}));
-        userRepository.deleteAll();
     }
 
     @Test
     @Transactional
     public void userShouldBelongToMeetingTest(){
 
-        User user1 = new User("user1","1");
+        User user1 = new User("1","user1");
         Meeting meeting = new Meeting();
-        user1.belongsTo(meeting,"1stTestUser");
+        user1.belongsTo(meeting,"1stTestUse_role",new Date().getTime(), new Date().getTime() + 1000000000l );
 
         meetingRepository.save(meeting);
         userRepository.save(user1);
 
-        user1.getMemberships().iterator().next();
         meeting.getMeetingName();
-        userRepository.findByMeeting("defaultMeeting");
-        assertThat(userRepository.findByMeeting(meeting).iterator().next(), is(user1)) ;
-        assertThat(userRepository.findByMeeting("defaultMeeting").iterator().next().getUserName(), is("user1"));
+        Set<Meeting> userSet = meetingRepository.getMeetings(user1.getUserName());
+        assertThat(meetingRepository.getMeetings(user1.getUserName()).iterator().next(), is(meeting)) ;
     }
-
-    @Test
-    @Transactional
-    public void shoudlFindAllCollaboratorsThroughAllMeetingsTest(){
-        User user11 = new User("user11","11Id");
-        User user12 = new User("user12","12Id");
-        User user13 = new User("user13","13Id");
-        User user21 = new User("user21","21Id");
-        User user22 = new User("user22","22Id");
-        User user23 = new User("user23","23Id");
-
-        Meeting meeting1 = new Meeting("meeting1","meeting1Id");
-        Meeting meeting2 = new Meeting("meeting2","meeting2Id");
-
-        user11.belongsTo(meeting1,"organizer");
-        user12.belongsTo(meeting1,"casual");
-        user13.belongsTo(meeting1,"casual");
-        user21.belongsTo(meeting2,"casual");
-        user22.belongsTo(meeting2,"casual");
-        user23.belongsTo(meeting2,"organizer");
-        user23.belongsTo(meeting1,"casual");
-
-
-        meetingRepository.save(Arrays.asList(new Meeting[]{meeting1,meeting2}));
-        userRepository.save(Arrays.asList(new User[]{user11, user12, user13, user21, user22, user23}));
-
-        assertThat(userRepository.findByUserName("user11").iterator().next(), is(user11));
-        assertThat(userRepository.findCollaborators(user23.getUserName()), containsInAnyOrder(new User[]{user11, user12, user13, user21, user22}));
-    }
-
 }

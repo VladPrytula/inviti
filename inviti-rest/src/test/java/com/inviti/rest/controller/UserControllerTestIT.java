@@ -55,15 +55,15 @@ public class UserControllerTestIT {
     @Test
     public void basicUserControllerTest() throws Exception {
         Mockito.doNothing().when(userServiceMock).save(Mockito.any(User.class));
-        Mockito.when(userMock.getName()).thenReturn("defaultName");
-        Mockito.when(userServiceMock.find("defaultName")).thenReturn(userMock);
+        Mockito.when(userMock.getUserName()).thenReturn("user12345");
+        Mockito.when(userServiceMock.find("user12345")).thenReturn(userMock);
 
 
         this.mockMvc.perform(MockMvcRequestBuilders.get("/ping")
                 .accept(MediaType.TEXT_HTML))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string("defaultName"));
+                .andExpect(MockMvcResultMatchers.content().string("user12345"));
     }
 
 }

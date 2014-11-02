@@ -29,6 +29,8 @@
 
 <!-- Custom styles for this template -->
 <link href="css/carousel.css" rel="stylesheet">
+<link href="css/social-buttons.css" rel="stylesheet">
+<link href="css/font-awesome.min.css" rel="stylesheet">
 </head>
 <!-- NAVBAR
 ================================================== -->
@@ -68,6 +70,62 @@
 				</div>
 			</div>
 		</div>
+        </div>
+        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
+             aria-labelledby="loginModalTitle" aria-hidden="true">
+            <div class="modal-dialog login">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                        </button>
+                        <h4 class="modal-title" id="loginModalTitle">Sign in to Inviti</h4>
+                    </div>
+                    <div class="modal-body inline">
+                        <div>
+                        <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
+                             alt="">
+                        </div>
+                        <div class="input-group signin-input has-error">
+                            <label class="control-label">&nbsp;</label>
+                            <input type="text" class="form-control" placeholder="Name" id="loginName">
+                        </div>
+                        <div class="input-group signin-input has-error login-password">
+                            <label class="control-label">&nbsp;</label>
+                            <input class="form-control" type="password" placeholder="Password" id="loginPassword">
+                        </div>
+                        <div class="checkbox remember-me">
+                            <input type="checkbox">
+                            <small> Remember me</small>
+                        </div>
+                    </div>
+                    <div class="inline or">
+                        OR
+                    </div>
+                    <div class="social-btns">
+                        <button class="btn btn-facebook"><i class="fa fa-facebook"></i> | Connect with Facebook</button><br>
+                        <button class="btn btn-twitter"><i class="fa fa-twitter"></i> | Connect with Twitter</button>
+                    </div>
+                   <!-- <div class="form-group has-error has-feedback add-user-server-error" id="login-error">
+                        <label class="control-label">Invalid username or password</label>
+                    </div>-->
+                    <div style="clear: left;">
+                        <div class="inline">
+                            <a href="#">
+                                <small class="forgot-password"> Forgot your password?</small>
+                            </a>
+                        </div>
+                        <div class="not-registered">
+                            <a href="#">
+                                <small> Not registered yet?</small>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="clear:left;">
+                       <button type="button" class="btn btn-primary" data-loading-text="Logging in..." id="login-user-button">Log in</button>
+                    </div>
+                </div>
+            </div>
 	</div>
 	<div class="navbar-wrapper">
 		<div class="container">
@@ -100,10 +158,12 @@
 									<li><a href="#">Separated link</a></li>
 									<li><a href="#">One more separated link</a></li>
 								</ul></li>
-							<li><a href="#">Sign in</a></li>
+                            <li><a id="ping" href="#">Ping</a></li>
+                        </ul>
+                        <ul  class="nav navbar-nav navbar-right">
 							<li><button class="btn btn-primary btn-sm btn-signup"
 									data-toggle="modal" data-target="#myModal">Sign up</button></li>
-                            <li><a id="ping" href="#">Ping</a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#loginModal">Sign in</a></li>
 						</ul>
 					</div>
 				</div>
@@ -125,7 +185,7 @@
 		<div class="carousel-inner">
 			<div class="item active">
 				<img
-					src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+					src="http://blog.fjordnorway.com/wp-content/uploads/2014/01/trolltunga_968_ho.jpg"
 					alt="First slide">
 				<div class="container">
 					<div class="carousel-caption">
@@ -146,7 +206,7 @@
 			</div>
 			<div class="item">
 				<img
-					src="data:image/gif;base64,R0lGODlhAQABAIAAAGZmZgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+					src="http://ichef.bbci.co.uk/wwtravel/624_330/images/live/p0/14/mt/p014mtzq.jpg"
 					alt="Second slide">
 				<div class="container">
 					<div class="carousel-caption">
@@ -163,7 +223,7 @@
 			</div>
 			<div class="item">
 				<img
-					src="data:image/gif;base64,R0lGODlhAQABAIAAAFVVVQAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+					src="http://www.airpano.ru/files/norway_fjords_03_big.jpg"
 					alt="Third slide">
 				<div class="container">
 					<div class="carousel-caption">
