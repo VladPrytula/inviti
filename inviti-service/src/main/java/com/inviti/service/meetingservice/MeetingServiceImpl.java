@@ -1,8 +1,6 @@
 package com.inviti.service.meetingservice;
 
 import com.inviti.model.domainmodel.Meeting;
-import com.inviti.repository.graph.State.MeetingStateRepository;
-import com.inviti.repository.graph.identity.MeetingIdentityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,10 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
  */
 public class MeetingServiceImpl implements MeetingService {
 
-    @Autowired
-    MeetingStateRepository meetingStateRepository;
-    @Autowired
-    MeetingIdentityRepository meetingIdentityRepository;
 
     @Override
     @Transactional

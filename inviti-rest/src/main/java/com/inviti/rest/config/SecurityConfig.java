@@ -102,8 +102,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 authorizeRequests().
                 antMatchers(HttpMethod.POST, "/login").permitAll().
-                antMatchers(HttpMethod.GET, "/ping").hasRole("USER").and()
-                .httpBasic().
+                antMatchers(HttpMethod.GET, "/ping").permitAll().
+                //.hasRole("USER").and().httpBasic().
 
                 and().
                         authorizeRequests().

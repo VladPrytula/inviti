@@ -22,9 +22,9 @@ class UserController {
     @ResponseStatus(HttpStatus.OK)
 
     public String ping() {
-        User firstUser = new User();
+        User firstUser = new User("12345","user12345" );
         userService.save(firstUser);
-        return userService.find("defaultName").getName();
+        return userService.find("user12345").getUserName().toString();
 /*        User defaultUser = new User();
         userService.saveUser(defaultUser);
         return userService.findUser("default").getUserName()+" "+ "user pong- pong";*/
