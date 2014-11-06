@@ -149,3 +149,57 @@ body {
 .add-user-server-error{
     margin-left: 20px;
 }
+/*  User login window*/
+div.modal-dialog {
+    width: 465px;
+}
+
+.profile-img {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 10px;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.forgot-password {
+    margin-left: 15px;
+}
+.not-registered {
+    margin-left: 350px;
+}
+
+.or {
+    margin-top: 105px;
+    margin-left: -50px;
+}
+
+.login-password {
+    margin-bottom: 2px;
+}
+
+.remember-me {
+    margin-top: 0px;
+    margin-left: 20px;
+}
+
+.social-btns {
+    margin-top: 55px;
+    margin-left: 250px;
+}
+
+.social-btns button {
+    margin: 20px 0 0;
+    width: 180px;
+}
+
+div.inline {
+    float: left;
+}
+
+.modal-body img {
+    margin-left: 190px;
+}
+/* user login window end*/
