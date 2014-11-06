@@ -185,7 +185,7 @@
 		<div class="carousel-inner">
 			<div class="item active">
 				<img
-					src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+					src="http://blog.fjordnorway.com/wp-content/uploads/2014/01/trolltunga_968_ho.jpg"
 					alt="First slide">
 				<div class="container">
 					<div class="carousel-caption">
@@ -206,7 +206,7 @@
 			</div>
 			<div class="item">
 				<img
-					src="data:image/gif;base64,R0lGODlhAQABAIAAAGZmZgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+					src="http://ichef.bbci.co.uk/wwtravel/624_330/images/live/p0/14/mt/p014mtzq.jpg"
 					alt="Second slide">
 				<div class="container">
 					<div class="carousel-caption">
@@ -223,7 +223,7 @@
 			</div>
 			<div class="item">
 				<img
-					src="data:image/gif;base64,R0lGODlhAQABAIAAAFVVVQAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+					src="http://www.airpano.ru/files/norway_fjords_03_big.jpg"
 					alt="Third slide">
 				<div class="container">
 					<div class="carousel-caption">
