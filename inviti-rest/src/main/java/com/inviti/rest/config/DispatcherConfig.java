@@ -7,6 +7,6 @@ import org.springframework.context.annotation.Import;
  * Created by vladyslavprytula on 8/7/14.
  */
 @Configuration
-@Import(WebConfig.class)
+//@Import(WebConfig.class)
 public class DispatcherConfig {
 }
