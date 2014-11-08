@@ -21,12 +21,9 @@ public class LoginController {
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public boolean login(@RequestBody User user) {
-        System.out.println("fwehkfhwefwehfuiwehfiuwhfuiwhefuihweiufhweuifhwieufhweiufhwieufhiweufhwieufhweiu");
-        System.out.println(user.getUserName() + " " + user.getPassword());
+        //TODO just a temp code - should be replaced with a basic user validation
         User loggedUser  = userService.find(user.getUserName());
-
         if (loggedUser != null){
-            System.out.println("User name : "+ loggedUser.getUserName());
             return (loggedUser.getUserName().equals(user.getUserName()) && loggedUser.getPassword().equals(user.getUserName()));
         }
         return false;
