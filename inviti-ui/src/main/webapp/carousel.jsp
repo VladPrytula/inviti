@@ -37,15 +37,15 @@
 <body>
     <div id="inviti-rest-url" class="environment">${environment}</div>
 	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="addUserModal" tabindex="-1" role="dialog"
+		aria-labelledby="addUserModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">
 						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Sign up a new user</h4>
+					<h4 class="modal-title" id="addUserModalLabel">Sign up a new user</h4>
 				</div>
 				<div class="modal-body">
 					<div class="input-group signin-input has-error">
@@ -106,17 +106,17 @@
                         <button class="btn btn-facebook"><i class="fa fa-facebook"></i> | Connect with Facebook</button><br>
                         <button class="btn btn-twitter"><i class="fa fa-twitter"></i> | Connect with Twitter</button>
                     </div>
-                   <!-- <div class="form-group has-error has-feedback add-user-server-error" id="login-error">
+                    <div class="form-group has-error has-feedback add-user-server-error" id="login-error">
                         <label class="control-label">Invalid username or password</label>
-                    </div>-->
+                    </div>
                     <div style="clear: left;">
                         <div class="inline">
-                            <a href="#">
+                            <a href="#" id="forgot-password-link">
                                 <small class="forgot-password"> Forgot your password?</small>
                             </a>
                         </div>
                         <div class="not-registered">
-                            <a href="#">
+                            <a href="#" id="not-registered-yet">
                                 <small> Not registered yet?</small>
                             </a>
                         </div>
@@ -162,7 +162,7 @@
                         </ul>
                         <ul  class="nav navbar-nav navbar-right">
 							<li><button class="btn btn-primary btn-sm btn-signup"
-									data-toggle="modal" data-target="#myModal">Sign up</button></li>
+									data-toggle="modal" data-target="#addUserModal">Sign up</button></li>
                             <li><a href="#" data-toggle="modal" data-target="#loginModal">Sign in</a></li>
 						</ul>
 					</div>
@@ -199,7 +199,7 @@
 						</p>
 						<p>
 							<a class="btn btn-lg btn-primary" data-toggle="modal"
-								data-target="#myModal">Sign up today</a>
+								data-target="#addUserModal">Sign up today</a>
 						</p>
 					</div>
 				</div>

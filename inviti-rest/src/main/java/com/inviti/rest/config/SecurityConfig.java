@@ -81,7 +81,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 csrf().disable().
 
                 formLogin().successHandler(successHandler).
-                loginProcessingUrl("/login").
+                loginProcessingUrl("/loginTest").
 
                 and().
 
@@ -103,6 +103,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 authorizeRequests().
                 antMatchers(HttpMethod.POST, "/login").permitAll().
                 antMatchers(HttpMethod.GET, "/ping").permitAll().
+                antMatchers(HttpMethod.GET, "/api-docs").permitAll().
                 //.hasRole("USER").and().httpBasic().
 
                 and().
