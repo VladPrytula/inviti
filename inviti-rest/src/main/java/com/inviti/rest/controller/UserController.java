@@ -20,7 +20,6 @@ class UserController {
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-
     public String ping() {
         User firstUser = new User("12345","user12345" );
         userService.save(firstUser);

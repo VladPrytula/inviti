@@ -46,7 +46,7 @@ var User = Backbone.Model.extend({
 });
 
 var AddUserView = Backbone.View.extend({
-    el: myModal,
+    el: addUserModal,
 
     events: {
         'click #add-user-button' : 'submit'
@@ -95,9 +95,9 @@ var AddUserView = Backbone.View.extend({
             password: $('#password').val()
         }, {
             success: function (model, resp) {
-                //TODO a new sign 'User was successfully added.' should be displayed on #MyModal window. Input fields should be removed as well as Submit button.
+                //TODO a new sign 'User was successfully added.' should be displayed on #addUserModal window. Input fields should be removed as well as Submit button.
                 $('#add-user-button').button('reset');
-                //$('#myModal').modal('hide');
+                //$('#addUserModal').modal('hide');
                 console.log('User was successfully added.');
             },
             error: function (model, xhr, options) {
@@ -111,8 +111,73 @@ var AddUserView = Backbone.View.extend({
 
 });
 
+var LoginUserView = Backbone.View.extend({
+    el: loginModal,
+
+    events: {
+        'click #login-user-button' : 'login',
+        'click #not-registered-yet' : 'signup'
+    },
+
+    initialize: function (){
+        this.hideErrors();
+    },
+
+    signup: function(){
+       $('#loginModal').modal('hide');
+       $('#addUserModal').modal('show');
+    },
+
+    login: function() {
+        this.hideErrors();
+        this.loginUser();
+    },
+
+    hideErrors: function (){
+        $('#login-error').hide();
+        $('.modal-body > div').removeClass('has-error');
+        $('.modal-body > div').find('label').text('');
+    },
+
+    //We can use jQuery ajax approach or backbone
+    loginUser: function (error) {
+
+        $('#login-user-button').button('loading');
+
+        var loginName     = $('#loginName').val(),
+            loginPassword = $('#loginPassword').val(),
+            rememberCheck = ''
+        //this.model.set({ name: loginName, password: loginPassword});
+        $.ajax({
+                url: getRestUrl() + '/login',
+                type: 'POST',
+                dataType: "json",
+                contentType: 'application/json',
+               // mimeType: 'application/json',
+                //data: {name: loginName, password: loginPassword},
+                data: JSON.stringify({userName: loginName, password: loginPassword}),
+                //data: this.model.toJSON(),
+                success: function (data) {
+                    $('#add-user-button').button('reset');
+                    alert(data);
+                },
+                error: function (xhr) {
+                    $('#login-user-button').button('reset');
+                    $('#login-error > label').text('Error: ' + xhr.statusText + ' ' + xhr.status)
+                    $('#login-error').show();
+                }
+            }
+        );
+    }
+
+
+});
+
+
+
 var user = new User();
 var addUserView = new AddUserView({model: user});
+var loginUserView = new LoginUserView({model: user});
 
 function getRestUrl() {
     return $('#inviti-rest-url').text();
