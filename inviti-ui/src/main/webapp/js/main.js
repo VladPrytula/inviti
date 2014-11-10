@@ -159,7 +159,11 @@ var LoginUserView = Backbone.View.extend({
                 //data: this.model.toJSON(),
                 success: function (data) {
                     $('#add-user-button').button('reset');
-                    alert(data);
+                    $('#loginModal').modal('hide');
+                    $("#signInButton").hide();
+                    $("#signUpButton").hide();
+                    $("#logOutButton").show();
+
                 },
                 error: function (xhr) {
                     $('#login-user-button').button('reset');
@@ -170,7 +174,6 @@ var LoginUserView = Backbone.View.extend({
         );
     }
 
-
 });
 
 
@@ -178,6 +181,7 @@ var LoginUserView = Backbone.View.extend({
 var user = new User();
 var addUserView = new AddUserView({model: user});
 var loginUserView = new LoginUserView({model: user});
+$("#logOutButton").hide();
 
 function getRestUrl() {
     return $('#inviti-rest-url').text();

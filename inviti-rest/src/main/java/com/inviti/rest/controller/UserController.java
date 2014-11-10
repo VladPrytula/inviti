@@ -21,7 +21,8 @@ class UserController {
     @RequestMapping(method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public String ping() {
-        User firstUser = new User("12345","user12345" );
+        User firstUser = new User("12345","user12345");
+        firstUser.setPassword("12345");
         userService.save(firstUser);
         return userService.find("user12345").getUserName().toString();
 /*        User defaultUser = new User();
