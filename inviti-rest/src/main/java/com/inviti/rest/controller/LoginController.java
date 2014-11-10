@@ -23,8 +23,10 @@ public class LoginController {
     public boolean login(@RequestBody User user) {
         //TODO just a temp code - should be replaced with a basic user validation
         User loggedUser  = userService.find(user.getUserName());
-        if (loggedUser != null){
-            return (loggedUser.getUserName().equals(user.getUserName()) && loggedUser.getPassword().equals(user.getUserName()));
+        if (loggedUser != null && user != null){
+            if (loggedUser.getUserName().equals(user.getUserName()) && loggedUser.getPassword().equals(user.getPassword())) {
+                return true;
+            }
         }
         return false;
     }

@@ -162,8 +162,9 @@
                         </ul>
                         <ul  class="nav navbar-nav navbar-right">
 							<li><button class="btn btn-primary btn-sm btn-signup"
-									data-toggle="modal" data-target="#addUserModal">Sign up</button></li>
-                            <li><a href="#" data-toggle="modal" data-target="#loginModal">Sign in</a></li>
+									data-toggle="modal" data-target="#addUserModal" id="signUpButton">Sign up</button></li>
+                            <li><a href="#" data-toggle="modal" data-target="#loginModal" id="signInButton">Sign in</a></li>
+                            <li><a href="#" data-toggle="modal" id="logOutButton">Log out</a></li>
 						</ul>
 					</div>
 				</div>
