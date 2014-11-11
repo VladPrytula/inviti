@@ -61,4 +61,17 @@ public class LoginControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string("true"));
     }
+
+    @Test
+    public void loginInvalidUserNameOrPassword() throws Exception {
+        Mockito.when(userServiceMock.find("ivanov")).thenReturn(null);
+        String jsonUser = "{\"userName\":\"ivanov\",\"password\":\"12345\"}";
+
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/login")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonUser))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string("false"));
+    }
 }
