@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 /**
  * Created by vladyslavprytula on 8/8/14.
@@ -28,7 +30,12 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User find(String userName) {
-        return userRepository.findByUserName(userName).iterator().next(); //TODO: might be zero.
+       User user = null;
+       List<User> users  = userRepository.findByUserName(userName);
+       if (users.iterator().hasNext()) {
+           user  = users.iterator().next();
+       }
+       return user;
     }
 
     @Override

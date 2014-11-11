@@ -141,7 +141,7 @@ var LoginUserView = Backbone.View.extend({
 
     //We can use jQuery ajax approach or backbone
     loginUser: function (error) {
-
+        var self = this;
         $('#login-user-button').button('loading');
 
         var loginName     = $('#loginName').val(),
@@ -153,27 +153,37 @@ var LoginUserView = Backbone.View.extend({
                 type: 'POST',
                 dataType: "json",
                 contentType: 'application/json',
-               // mimeType: 'application/json',
-                //data: {name: loginName, password: loginPassword},
                 data: JSON.stringify({userName: loginName, password: loginPassword}),
-                //data: this.model.toJSON(),
                 success: function (data) {
-                    $('#add-user-button').button('reset');
-                    $('#loginModal').modal('hide');
-                    $("#signInButton").hide();
-                    $("#signUpButton").hide();
-                    $("#logOutButton").show();
+                    if (data == true) {
+                        self.handleResult(loginName);
+                    } else {
+                        self.showError('Invalid username or password')
+                    }
 
                 },
                 error: function (xhr) {
-                    $('#login-user-button').button('reset');
-                    $('#login-error > label').text('Error: ' + xhr.statusText + ' ' + xhr.status)
-                    $('#login-error').show();
+                    self.showError('Error: ' + xhr.statusText + ' ' + xhr.status)
                 }
             }
         );
-    }
+    },
 
+    handleResult: function (loginName){
+        $('#add-user-button').button('reset');
+        $('#loginModal').modal('hide');
+        $("#signInButton").hide();
+        $("#signUpButton").hide();
+        $("#logOutButton").show();
+        $("#userName").text(loginName);
+        $("#userMenu").show();
+    },
+
+    showError: function (error) {
+        $('#login-user-button').button('reset');
+        $('#login-error > label').text(error);
+        $('#login-error').show();
+    }
 });
 
 
@@ -182,6 +192,7 @@ var user = new User();
 var addUserView = new AddUserView({model: user});
 var loginUserView = new LoginUserView({model: user});
 $("#logOutButton").hide();
+$("#userMenu").hide();
 
 function getRestUrl() {
     return $('#inviti-rest-url').text();

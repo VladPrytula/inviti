@@ -163,8 +163,18 @@
                         <ul  class="nav navbar-nav navbar-right">
 							<li><button class="btn btn-primary btn-sm btn-signup"
 									data-toggle="modal" data-target="#addUserModal" id="signUpButton">Sign up</button></li>
+                            <li class="dropdown"><a href="#" class="dropdown-toggle"
+                                                    data-toggle="dropdown" id="userMenu"> <span id="userName"></span><span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Messages</a></li>
+                                    <li><a href="#">My meetings</a></li>
+                                    <li class="divider"></li>
+                                    <li class="dropdown-header">Settings</li>
+                                        <li><a href="#">My profile</a></li>
+                                    <li><a href="#">Sign out</a></li>
+                                </ul></li>
                             <li><a href="#" data-toggle="modal" data-target="#loginModal" id="signInButton">Sign in</a></li>
-                            <li><a href="#" data-toggle="modal" id="logOutButton">Log out</a></li>
+                            <li><a href="#" data-toggle="modal" id="logOutButton">Sign out</a></li>
 						</ul>
 					</div>
 				</div>
