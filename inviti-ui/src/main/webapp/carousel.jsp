@@ -49,15 +49,15 @@
 				</div>
 				<div class="modal-body">
 					<div class="input-group signin-input has-error">
-                        <label class="control-label">&nbsp;</label>
+                        <label class="control-label small">&nbsp;</label>
 						<input type="text" class="form-control" placeholder="Username" id="name">
 					</div>
 					<div class="input-group signin-input has-error">
-                        <label class="control-label">&nbsp;</label>
+                        <label class="control-label small">&nbsp;</label>
 						<input type="text" class="form-control" placeholder="Email" id="email">
 					</div>
 					<div class="input-group signin-input has-error">
-                        <label class="control-label">&nbsp;</label>
+                        <label class="control-label small">&nbsp;</label>
 						<input class="form-control" type="password" placeholder="Password" id="password">
 					</div>
 				</div>
@@ -87,11 +87,9 @@
                              alt="">
                         </div>
                         <div class="input-group signin-input has-error">
-                            <label class="control-label">&nbsp;</label>
                             <input type="text" class="form-control" placeholder="Name" id="loginName">
                         </div>
                         <div class="input-group signin-input has-error login-password">
-                            <label class="control-label">&nbsp;</label>
                             <input class="form-control" type="password" placeholder="Password" id="loginPassword">
                         </div>
                         <div class="checkbox remember-me">

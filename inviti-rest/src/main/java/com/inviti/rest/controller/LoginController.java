@@ -24,7 +24,6 @@ public class LoginController {
         //TODO just a temp code - should be replaced with a basic user validation
         User loggedUser  = userService.find(user.getUserName());
         if (loggedUser != null && user != null){
-            System.out.println("logget is not nyull");
             if (loggedUser.getUserName().equals(user.getUserName()) && loggedUser.getPassword().equals(user.getPassword())) {
                 return true;
             }
