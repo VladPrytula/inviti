@@ -1,4 +1,4 @@
-var User = Backbone.Model.extend({
+var AddUser = Backbone.Model.extend({
     url: $('#inviti-rest-url').text() + '/adduser',
 
     defaults: {
@@ -75,18 +75,6 @@ var AddUserView = Backbone.View.extend({
 
     //We can use jQuery ajax approach or backbone
     addUser: function(error){
-        /* $.ajax({
-         url: getRestUrl() + '/adduser',
-         type:'POST',
-         dataType:"json",
-         data: this.model.toJSON(),
-         success: function (data) {
-         alert(data);
-         },
-         error: function(){
-         }
-         }
-         );*/
 
         $('#add-user-button').button('loading');
         this.model.save({
@@ -110,6 +98,42 @@ var AddUserView = Backbone.View.extend({
 
 
 });
+
+var LoginUser = Backbone.Model.extend({
+
+    defaults: {
+        loginName: '',
+        loginPassword: ''
+    },
+
+    validate: function (attrs, options) {
+        var errors = [];
+        if (!attrs.loginName) {
+            errors.push('loginName');
+        }
+        if (!attrs.loginPassword) {
+            errors.push('loginPassword');
+        }
+
+        if (errors.length > 0){
+            return errors;
+        }
+    },
+    initialize: function () {
+        this.on('invalid', function (model, errors) {
+            $('#login-user-button').button('reset');
+            this.showErrors(errors);
+        });
+    },
+
+    showErrors: function (errors) {
+        _.each(errors, function (error) {
+            $('#'+error).parent().addClass('has-error');
+        }, this);
+    }
+
+});
+
 
 var LoginUserView = Backbone.View.extend({
     el: loginModal,
@@ -136,37 +160,42 @@ var LoginUserView = Backbone.View.extend({
     hideErrors: function (){
         $('#login-error').hide();
         $('.modal-body > div').removeClass('has-error');
-        $('.modal-body > div').find('label').text('');
     },
 
     //We can use jQuery ajax approach or backbone
     loginUser: function (error) {
         var self = this;
-        $('#login-user-button').button('loading');
+        this.model.set('loginName', $('#loginName').val());
+        this.model.set('loginPassword', $('#loginPassword').val());
+        if (this.model.isValid()) {
 
-        var loginName     = $('#loginName').val(),
-            loginPassword = $('#loginPassword').val(),
-            rememberCheck = ''
-        //this.model.set({ name: loginName, password: loginPassword});
-        $.ajax({
-                url: getRestUrl() + '/login',
-                type: 'POST',
-                dataType: "json",
-                contentType: 'application/json',
-                data: JSON.stringify({userName: loginName, password: loginPassword}),
-                success: function (data) {
-                    if (data == true) {
-                        self.handleResult(loginName);
-                    } else {
-                        self.showError('Invalid username or password')
+            $('#login-user-button').button('loading');
+
+            var loginName = $('#loginName').val(),
+                loginPassword = $('#loginPassword').val(),
+                rememberCheck = ''
+            $.ajax({
+                    url: getRestUrl() + '/login',
+                    type: 'POST',
+                    dataType: "json",
+                    contentType: 'application/json',
+                    data: JSON.stringify({userName: loginName, password: loginPassword}),
+                    success: function (data) {
+                        if (data == true) {
+                            self.handleResult(loginName);
+                        } else {
+                            self.showError('Invalid username or password')
+                        }
+
+                    },
+                    error: function (xhr) {
+                        self.showError('Error: ' + xhr.statusText + ' ' + xhr.status)
                     }
-
-                },
-                error: function (xhr) {
-                    self.showError('Error: ' + xhr.statusText + ' ' + xhr.status)
                 }
-            }
-        );
+            );
+        } else {
+            self.showError('Error: name and login can not be empty');
+        }
     },
 
     handleResult: function (loginName){
@@ -188,9 +217,10 @@ var LoginUserView = Backbone.View.extend({
 
 
 
-var user = new User();
-var addUserView = new AddUserView({model: user});
-var loginUserView = new LoginUserView({model: user});
+var addUser = new AddUser();
+var addUserView = new AddUserView({model: addUser});
+var loginUser = new LoginUser();
+var loginUserView = new LoginUserView({model: loginUser});
 $("#logOutButton").hide();
 $("#userMenu").hide();
 
