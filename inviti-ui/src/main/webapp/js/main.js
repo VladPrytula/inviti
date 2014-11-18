@@ -1,3 +1,6 @@
+MyApp = {};
+MyApp.vent = _.extend({}, Backbone.Events);
+
 var AddUser = Backbone.Model.extend({
     url: $('#inviti-rest-url').text() + '/adduser',
 
@@ -194,7 +197,7 @@ var LoginUserView = Backbone.View.extend({
                 }
             );
         } else {
-            self.showError('Error: name and login can not be empty');
+            self.showError('Error: Name and Password can not be empty');
         }
     },
 
@@ -206,7 +209,15 @@ var LoginUserView = Backbone.View.extend({
         $("#logOutButton").show();
         $("#userName").text(loginName);
         $("#userMenu").show();
+        this.addSuggestedMeetings(loginName);
     },
+
+    addSuggestedMeetings: function (loginName) {
+        MyApp.vent.trigger('logged');
+
+    },
+
+
 
     showError: function (error) {
         $('#login-user-button').button('reset');
@@ -215,12 +226,132 @@ var LoginUserView = Backbone.View.extend({
     }
 });
 
+MyApp.vent.on('logged', function(){
+    var homeUserView = new HomeUserView({model: loginUser});
+});
+
+var HomeUserView = Backbone.View.extend({
+
+    events: {
+    },
+
+    initialize: function () {
+        this.showSuggestedMeetings();
+    },
+
+    showSuggestedMeetings: function(){
+        this.getUser();
+        this.getMeetings();
+        this.showMeetingByUserLocation();
+        this.showMeetingsByInterests();
+        this.showFriendsMeetings();
+        alert('Home User View ran!');
+    },
+
+    getUser: function (loginName){
+        var self = this;
+        $.ajax({
+                url: getRestUrl() + '/users/criterion;name=user12345',
+                type: 'GET',
+                dataType: "json",
+                contentType: 'application/json',
+                success: function (data) {
+                    //populate user model
+
+                },
+                error: function (xhr) {
+
+                }
+            }
+        );
+
+    },
+
+    getMeetings: function (){
+        var self = this;
+        $.ajax({
+                url: getRestUrl() + '/meetings/criterion;username=user12345',
+                type: 'GET',
+                dataType: "json",
+                contentType: 'application/json',
+                success: function (data) {
+                    //populate user model
+
+                },
+                error: function (xhr) {
+
+                }
+            }
+        );
+
+    },
+
+    showMeetingByUserLocation: function () {
+        var self = this;
+            $.ajax({
+                    url: getRestUrl() + '/meetings/criterion;location=US,NH,Portland',
+                    type: 'GET',
+                    dataType: "json",
+                    contentType: 'application/json',
+                     success: function (data) {
+
+
+                    },
+                    error: function (xhr) {
+
+                    }
+                }
+            );
+
+    },
+
+
+    showMeetingsByInterests: function () {
+        var self = this;
+        $.ajax({
+                url: getRestUrl() + '/meetings/criterion;interest=Food,Sport',
+                type: 'GET',
+                dataType: "json",
+                contentType: 'application/json',
+                success: function (data) {
+
+
+                },
+                error: function (xhr) {
+
+                }
+            }
+        );
+
+    },
+
+    showFriendsMeetings: function (loginName) {
+        var self = this;
+        $.ajax({
+                url: getRestUrl() + '/meetings/friends;userid=12345',
+                type: 'GET',
+                dataType: "json",
+                contentType: 'application/json',
+                success: function (data) {
+
+
+                },
+                error: function (xhr) {
+
+                }
+            }
+        );
+
+    }
+
+});
 
 
 var addUser = new AddUser();
 var addUserView = new AddUserView({model: addUser});
 var loginUser = new LoginUser();
 var loginUserView = new LoginUserView({model: loginUser});
+//var homeUserView = new HomeUserView({model: loginUser});
 $("#logOutButton").hide();
 $("#userMenu").hide();
 
