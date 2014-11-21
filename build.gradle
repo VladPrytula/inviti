@@ -7,6 +7,9 @@ subprojects {
         maven {
             url 'http://repo.spring.io/milestone'
         }
+        maven {
+            url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/'
+        }
     }
 
 
@@ -17,7 +20,7 @@ subprojects {
         compile 'com.google.guava:guava:17.0'
         testCompile 'junit:junit:4.11'
         testCompile 'org.mockito:mockito-core:1.9.5'
-        testCompile 'org.springframework:spring-test:'+spring
+        testCompile 'org.springframework:spring-test:' + spring
         testCompile 'org.hamcrest:hamcrest-all:1.3'
     }
 }
