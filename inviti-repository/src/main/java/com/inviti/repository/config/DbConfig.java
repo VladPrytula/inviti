@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.data.neo4j.config.EnableNeo4jRepositories;
 import org.springframework.data.neo4j.config.Neo4jConfiguration;
-import org.springframework.data.neo4j.rest.SpringRestGraphDatabase;
+import org.springframework.data.neo4j.rest.SpringCypherRestGraphDatabase;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.annotation.Resource;
@@ -29,7 +29,7 @@ public class DbConfig extends Neo4jConfiguration {
     }
     @Bean
     public GraphDatabaseService graphDatabaseService() {
-        GraphDatabaseService graphDb= new SpringRestGraphDatabase(env.getProperty("inviti.restgraphdb.url"));
+        GraphDatabaseService graphDb= new SpringCypherRestGraphDatabase(env.getProperty("inviti.restgraphdb.url"));
         return  graphDb;
     }
 }
