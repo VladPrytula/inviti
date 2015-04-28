@@ -5,6 +5,7 @@ dependencies {
     compile 'org.neo4j.app:neo4j-server:2.1.3'
     compile 'javax.validation:validation-api:1.1.0.Final'
     compile 'org.springframework:spring-tx:' + spring
+    compile 'org.springframework.data:spring-data-cassandra:1.2.0.RELEASE'
 
 
     testCompile group: 'org.neo4j', name: 'neo4j-kernel', version: '2.1.3', classifier: 'tests'
