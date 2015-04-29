@@ -1,6 +1,6 @@
 inviti project
 ======
-Prerequisites :
+#Prerequisites :
 What is required for successfull build : JDK 7+, Gradle
 What is required for running : Neo4J standalone, Cassandra Standalone
 Installation Instructin for Neo4j : follow Neo4j official instructions.
@@ -20,7 +20,7 @@ Add Cassandra to your PATH
 Update your PATH to include Cassandra.
 
 open -a TextEdit ~/.profile
-# include locally installed Cassandra in PATH
+Include locally installed Cassandra in PATH
 if [ -d "$HOME/opt" ]; then
     PATH="$PATH:$HOME/opt/cassandra/bin"
 fi
