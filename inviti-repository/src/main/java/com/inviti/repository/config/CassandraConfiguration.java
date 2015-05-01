@@ -4,6 +4,7 @@ import com.inviti.repository.annotations.ProductionConfig;
 import com.inviti.repository.annotations.TestConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -14,10 +15,11 @@ import org.springframework.data.cassandra.mapping.CassandraMappingContext;
 import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories;
 
 @Configuration
+@ProductionConfig
+@TestConfig
 @PropertySource(value = { "classpath:cassandra.properties" })
-@ProductionConfig // N.B. we use Cassandra as for prod as for test
-@TestConfig // N.B. we use Cassandra as for prod as for test
-@EnableCassandraRepositories(basePackages = { "example" })
+@ComponentScan(basePackages = {"com.inviti.repository.keyvalue"})
+@EnableCassandraRepositories(basePackages = {"com.inviti.repository.keyvalue"})
 public class CassandraConfiguration extends AbstractCassandraConfiguration {
 
     @Autowired

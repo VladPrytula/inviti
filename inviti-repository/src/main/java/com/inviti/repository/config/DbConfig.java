@@ -19,7 +19,7 @@ import javax.annotation.Resource;
 @EnableTransactionManagement
 @Configuration
 @ProductionConfig
-@EnableNeo4jRepositories(basePackages = "com.inviti.repository")
+@EnableNeo4jRepositories(basePackages = "com.inviti.repository.graph")
 public class DbConfig extends Neo4jConfiguration {
     @Resource
     private Environment env;
