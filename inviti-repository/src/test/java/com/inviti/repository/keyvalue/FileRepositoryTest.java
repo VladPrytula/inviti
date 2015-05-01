@@ -19,8 +19,13 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.awt.image.WritableRaster;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.ByteBuffer;
+import java.nio.file.Files;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {CassandraConfiguration.class})
@@ -28,12 +33,12 @@ import java.net.URL;
         DependencyInjectionTestExecutionListener.class,
         DirtiesContextTestExecutionListener.class,
         TransactionalTestExecutionListener.class})
-public class FileRepositoryTest{
+public class FileRepositoryTest {
     @Autowired
     FileRepository fileRepository;
 
     @Before
-    public void cleanData(){
+    public void cleanData() {
         fileRepository.deleteAll();
     }
 
@@ -44,7 +49,21 @@ public class FileRepositoryTest{
         BufferedImage image = null;
         URL imageURL = new URL("http://exmoorpet.com/wp-content/uploads/2012/08/cat.png");
         image = ImageIO.read(imageURL);
-        fileRepository.save(new DataStore(UUIDs.timeBased(),"test","test", ImmutableSet.of("tag1", "tag3")));
-        Assert.assertEquals(fileRepository.findAll().iterator().next().getType(),"test");
+
+        // get DataBufferBytes from Raster
+        WritableRaster raster = image.getRaster();
+        DataBufferByte data   = (DataBufferByte) raster.getDataBuffer();
+
+        // Create a byte array
+        byte[] bytes = new byte[10];
+        // Wrap a byte array into a buffer
+        ByteBuffer buf = ByteBuffer.wrap(data.getData());
+
+
+        fileRepository.save(new DataStore(UUIDs.timeBased(), "test", "test", ImmutableSet.of("tag1", "tag3"),
+                buf));
+        Assert.assertEquals(fileRepository.findAll().iterator().next().getType(), "test");
+
+        Assert.assertEquals(fileRepository.findAll().iterator().next().getImage(), buf);
     }
 }
