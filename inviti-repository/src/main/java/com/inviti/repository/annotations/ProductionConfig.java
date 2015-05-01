@@ -1,10 +1,5 @@
 package com.inviti.repository.annotations;
 
-/**
- * Created by vladyslavprytula on 8/14/14.
- */
-
-
 import java.lang.annotation.Retention;
 
 import java.lang.annotation.ElementType;

@@ -6,12 +6,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-/**
- * Created by Sergii_Iakymenko on 11/08/2014.
- */
 @WebFilter(filterName = "EnvironmentFilter", urlPatterns = {"/*"})
 public class EnvironmentFilter implements Filter {
-
     private static final String ENVIRONMENT_PROPERTIES = "com/inviti/ui/inviti-ui-%s.properties";
     private static final String ENVIRONMENT_NAME = "environment";
 

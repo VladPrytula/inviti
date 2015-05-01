@@ -1,3 +1,4 @@
 dependencies {
     compile 'org.springframework.data:spring-data-neo4j:'+springdataneo
+    compile 'org.springframework.data:spring-data-cassandra:1.2.0.RELEASE'
 }

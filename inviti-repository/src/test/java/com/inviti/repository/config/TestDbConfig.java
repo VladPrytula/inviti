@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @Configuration
 @TestConfig
-@EnableNeo4jRepositories(basePackages = "com.inviti.repository")
+@EnableNeo4jRepositories(basePackages = "com.inviti.repository.graph")
 public class TestDbConfig  extends Neo4jConfiguration {
 
     public TestDbConfig() throws ClassNotFoundException {
