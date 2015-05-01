@@ -1,7 +1,6 @@
 package com.inviti.rest.config;
 
 import com.mangofactory.swagger.configuration.SpringSwaggerConfig;
-import com.mangofactory.swagger.paths.RelativeSwaggerPathProvider;
 import com.mangofactory.swagger.paths.SwaggerPathProvider;
 import com.mangofactory.swagger.plugin.EnableSwagger;
 import com.mangofactory.swagger.plugin.SwaggerSpringMvcPlugin;
@@ -19,6 +18,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableSwagger
 @PropertySource("classpath:swagger.properties")
 @ComponentScan("com.inviti.rest.controller")
+
 public class SwaggerConfig {
 
     private SpringSwaggerConfig springSwaggerConfig;
@@ -34,6 +34,8 @@ public class SwaggerConfig {
     private String license;
     @Value("${licenseUrl}")
     private String licenseUrl;
+    @Value("${applicationPath}")
+    private String applicationPath;
 
     @Autowired
     public void setSpringSwaggerConfig(SpringSwaggerConfig springSwaggerConfig) {
@@ -46,7 +48,7 @@ public class SwaggerConfig {
                 .apiInfo(apiInfo()).pathProvider(new SwaggerPathProvider() {
                     @Override
                     protected String applicationPath() {
-                        return "/";
+                        return applicationPath;
                     }
 
                     @Override
