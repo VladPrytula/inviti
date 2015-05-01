@@ -13,10 +13,12 @@ import org.springframework.data.cassandra.config.java.AbstractCassandraConfigura
 import org.springframework.data.cassandra.mapping.BasicCassandraMappingContext;
 import org.springframework.data.cassandra.mapping.CassandraMappingContext;
 import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @ProductionConfig
 @TestConfig
+@EnableTransactionManagement
 @PropertySource(value = { "classpath:cassandra.properties" })
 @ComponentScan(basePackages = {"com.inviti.repository.keyvalue"})
 @EnableCassandraRepositories(basePackages = {"com.inviti.repository.keyvalue"})

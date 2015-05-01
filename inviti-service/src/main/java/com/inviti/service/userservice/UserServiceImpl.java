@@ -10,10 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-
-/**
- * Created by vladyslavprytula on 8/8/14.
- */
 @Service
 public class UserServiceImpl implements UserService{
 

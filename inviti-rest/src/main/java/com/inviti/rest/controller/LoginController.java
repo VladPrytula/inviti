@@ -7,9 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
-/**
- * Created by roman.tokmakov on 11/7/2014.
- */
 @RestController
 @RequestMapping("/login")
 @Secured("USER")

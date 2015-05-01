@@ -7,9 +7,6 @@ subprojects {
         maven {
             url 'http://repo.spring.io/milestone'
         }
-        maven {
-            url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/'
-        }
     }
 
 
